@@ -51,3 +51,33 @@ function removeEquipe(val)
 		div.removeChild(equipe.pop());
 	}
 }
+
+function changeGroupe()
+{
+	var type = document.getElementById('typeTournoi').value;
+
+	if(type == 'Elimination direct')
+	{
+		document.getElementById('inputGroupe').style.display = 'hide';
+	}
+	else
+	{
+		document.getElementById('inputGroupe').style.display = 'block';
+	}
+}
+
+$(function(){
+	$('#typeTournoi').change(function(e){
+		var type = document.getElementById('typeTournoi').value;
+
+		console.log(type);
+		if(type == 1)
+		{
+			document.getElementById('inputGroupe').style.display = 'none';
+		}
+		else
+		{
+			document.getElementById('inputGroupe').style.display = '';
+		}
+	});
+});
