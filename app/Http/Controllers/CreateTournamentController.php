@@ -11,7 +11,8 @@ class CreateTournamentController extends Controller
     
     public function createTournament()
     {
-    	return view('Pages.formCreateTournament');
+    	$tournoi = ''; //$_POST[''];
+    	return view('Pages.formCreateTournament')->with('tournoi');
     }
     
 }
