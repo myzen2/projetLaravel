@@ -13,9 +13,4 @@ class PagesController extends Controller
     {
     	return view('Pages.index');
     }
-
-    public function form()
-    {
-    	//return view('Pages.xxx');
-    }
 }
