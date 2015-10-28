@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -14,8 +14,10 @@ class PagesController extends Controller
     	return view('Pages.index');
     }
 
-    public function form()
+    public function showForm()
     {
-    	//return view('Pages.xxx');
+    	$titleTournament = Request::get('title');
+    	
+    	return view('Pages.create')->with('titleTournament', $titleTournament);
     }
 }
