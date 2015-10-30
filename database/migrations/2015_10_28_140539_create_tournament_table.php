@@ -21,10 +21,12 @@ class CreateTournamentTable extends Migration
             $table->integer('nbEquipe');
             $table->integer('nbTerrain');
             $table->integer('nbGroupe');
-            $table->integer('timeMatch');
-            $table->integer('timeEntre');
+            $table->integer('tempsMatch');
+            $table->integer('tempsEntreMatch');
             $table->integer('typeTournoi');
             $table->date('date');
+            $table->timestamp('pauseDebut');
+            $table->timestamp('pauseFin');
             $table->rememberToken();
             $table->timestamps();
         });

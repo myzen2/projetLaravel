@@ -24,7 +24,7 @@ class EquipeRequest extends Request
     public function rules()
     {
         return [
-            //
+            'nom' => 'required|nom'
         ];
     }
 }

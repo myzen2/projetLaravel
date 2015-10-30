@@ -6,22 +6,30 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Tournament;
+use App\Http\Requests\TournamentRequest;
 
 class CreateTournamentController extends Controller
 {
     
-    public function getTournament()
+    public function getTournament(Request $request)
     {
-    	$tournoi = ''; //$_POST[''];
-    	return view('Pages.formCreateTournament')->with('tournoi');
+    	$titleTournament = $request->input('titleTournament');
+    	return view('Pages.formCreateTournament')->with('titleTournament');
     }
 
     public function postTournament(TournamentRequest $request)
     {
-    	$tournament = new Tournament;	
+    	$input = $request->all();
 
-    	$tournament->nbEquipe = $_POST['nbEquipe'];
-    	return $tournament->nbEquipe;
+    	$tempsDebut = strtotime($input['date'].' '.$input['pauseDebut']);
+    	$tempsFin = strtotime($input['date'].' '.$input['pauseFin']);
+
+    	$input['pauseDebut'] = date('Y-m-d H:i', $tempsDebut);
+    	$input['pauseFin'] = date('Y-m-d H:i', $tempsFin);
+
+		Tournament::create($input);
+    	
+    	return redirect('createTournament');
     }
     
 }

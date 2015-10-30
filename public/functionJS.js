@@ -29,14 +29,15 @@ function addEquipe(val)
 	while(nbEquipe > lastNumber)
 	{
 		lastNumber++;
-		var tr = document.createElement('tr');
-		var td = document.createElement('td');
-		td.setAttribute('colspan', '3');
-		td.innerHTML = "<input type='text' name='equipe" + lastNumber + "' id='equipe" + lastNumber + "' placeholder='Equipe " + lastNumber + "' />";
-		tr.appendChild(td);
+		
+		var input = document.createElement('input');
+		input.setAttribute('type', 'text');
+		input.setAttribute('id', 'equipe'+lastNumber);
+		input.setAttribute('name', 'equipe'+lastNumber);
+		input.setAttribute('placeholder', 'Equipe '+lastNumber);
 
-		equipe.push(tr);
-		div.appendChild(tr);
+		equipe.push(input);
+		div.appendChild(input);
 	}
 }
 

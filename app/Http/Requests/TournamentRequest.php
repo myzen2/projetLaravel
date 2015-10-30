@@ -24,16 +24,18 @@ class TournamentRequest extends Request
     public function rules()
     {
         return [
-            'nom' => 'required|nom',
-            'lieu' => 'required|lieu',
-            'adresse' => 'required|adresse',
-            'nbEquipe' => 'required|nbEquipe',
-            'nbTerrain' => 'required|nbTerrain',
-            'nbGroupe' => 'required|nbGroupe',
-            'timeMatch' => 'required|timeMatch',
-            'timeEntre' => 'required|timeEntre',
-            'typeTournoi' => 'required|typeTournoi',
+            'nom' => 'required',
+            'lieu' => 'required',
+            'adresse' => 'required',
+            'nbEquipe' => 'required',
+            'nbTerrain' => 'required',
+            'nbGroupe' => 'required',
+            'tempsMatch' => 'required',
+            'tempsEntreMatch' => 'required',
+            'typeTournoi' => 'required',
             'date' => 'required|date',
+            'pauseDebut' => 'required|date_format:H:i',
+            'pauseFin' => 'required|date_format:H:i'
         ];
     }
 }
