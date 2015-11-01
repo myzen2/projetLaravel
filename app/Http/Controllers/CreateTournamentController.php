@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Tournament;
+use App\Equipe;
 use App\Http\Requests\TournamentRequest;
 
 class CreateTournamentController extends Controller
@@ -21,13 +22,13 @@ class CreateTournamentController extends Controller
     {
     	$input = $request->all();
 
-    	$tempsDebut = strtotime($input['date'].' '.$input['pauseDebut']);
-    	$tempsFin = strtotime($input['date'].' '.$input['pauseFin']);
+    	$tournamentId = Tournament::updateTournament($input);
 
-    	$input['pauseDebut'] = date('Y-m-d H:i', $tempsDebut);
-    	$input['pauseFin'] = date('Y-m-d H:i', $tempsFin);
-
-		Tournament::create($input);
+    	$equipe = new Equipe;
+		foreach ($input['equipe'] as $value) 
+		{
+			Equipe::updateEquipe($value, $tournamentId);
+		}
     	
     	return redirect('createTournament');
     }

@@ -29,11 +29,11 @@ function addEquipe(val)
 	while(nbEquipe > lastNumber)
 	{
 		lastNumber++;
-		
+
 		var input = document.createElement('input');
 		input.setAttribute('type', 'text');
 		input.setAttribute('id', 'equipe'+lastNumber);
-		input.setAttribute('name', 'equipe'+lastNumber);
+		input.setAttribute('name',  'equipe[]');//'equipe'+lastNumber);
 		input.setAttribute('placeholder', 'Equipe '+lastNumber);
 
 		equipe.push(input);
