@@ -7,7 +7,7 @@
 Bienvenue sur notre site. Avec nous, créez et gérez rapidement et facilement votre manifestation sportive.
 </p>
 
-{!! Form::open(['url' => 'tournamentCreation']) !!}
+{!! Form::open(['url' => '']) !!}
 
 		<div class="form-group">
 			{!! Form::label('title', 'Nom du tournoi') !!}

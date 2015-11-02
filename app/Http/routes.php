@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'PagesController@index');
+Route::post('/', 'PagesController@showForm');
 
 Route::get('/createTournament', 'CreateTournamentController@getTournament');
 Route::post('/createTournament', 'CreateTournamentController@postTournament');

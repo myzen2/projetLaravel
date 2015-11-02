@@ -18,6 +18,6 @@ class PagesController extends Controller
     {
     	$titleTournament = Request::get('title');
     	
-    	return view('Pages.create')->with('titleTournament', $titleTournament);
+    	return view('Pages.formCreateTournament')->with('titleTournament', $titleTournament);
     }
 }

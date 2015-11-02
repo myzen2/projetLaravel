@@ -22,12 +22,12 @@ class CreateTournamentController extends Controller
     {
     	$input = $request->all();
 
-    	$tournamentId = Tournament::updateTournament($input);
+    	$tournament = Tournament::create($input);
 
     	$equipe = new Equipe;
 		foreach ($input['equipe'] as $value) 
 		{
-			Equipe::updateEquipe($value, $tournamentId);
+			Equipe::updateEquipe($value, $tournament->id);
 		}
     	
     	return redirect('createTournament');
