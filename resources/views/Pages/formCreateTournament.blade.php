@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<h1>Création du tournoi : {{ $titleTournament }}</h1>
+	<h1>Création du tournoi : {{ session('titleTournament') }}</h1>
 
 	{!! Form::open(['url' => 'createTournament']) !!}
 	<div class="form-group">
@@ -61,7 +61,7 @@
 		{!! Form::submit('Créer tournoi') !!}
 	</div>
 
-		{!! Form::input('hidden', 'nom', 'nom') !!}
+		{!! Form::input('hidden', 'nom', session('titleTournament')) !!}
 	{!! Form::close() !!}
 
 
