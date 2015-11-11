@@ -14,8 +14,11 @@ class CreateTournamentController extends Controller
     
     public function getTournament(Request $request)
     {
-    	$titleTournament = $request->input('titleTournament');
-    	return view('Pages.formCreateTournament')->with('titleTournament');
+    	$titleTournament = session('titleTournament');
+
+    	if($titleTournament == "") return redirect('/');
+
+    	return view('Pages.formCreateTournament')->with('titleTournament', $titleTournament);
     }
 
     public function postTournament(TournamentRequest $request)
@@ -29,8 +32,8 @@ class CreateTournamentController extends Controller
 		{
 			Equipe::updateEquipe($value, $tournament->id);
 		}
-    	
-    	return redirect('createTournament');
+
+    	return redirect('createTournament')->with('titleTournament', $input['nom']);
     }
     
 }

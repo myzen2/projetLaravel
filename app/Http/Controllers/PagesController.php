@@ -6,6 +6,7 @@ use Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 
 class PagesController extends Controller
 {
@@ -17,7 +18,7 @@ class PagesController extends Controller
     public function showForm()
     {
     	$titleTournament = Request::get('title');
-    	
-    	return view('Pages.formCreateTournament')->with('titleTournament', $titleTournament);
+
+        return redirect('createTournament')->with('titleTournament', $titleTournament);
     }
 }
