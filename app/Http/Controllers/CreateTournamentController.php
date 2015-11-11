@@ -28,12 +28,14 @@ class CreateTournamentController extends Controller
     	$tournament = Tournament::create($input);
 
     	$equipe = new Equipe;
+
 		foreach ($input['equipe'] as $value) 
 		{
 			Equipe::updateEquipe($value, $tournament->id);
 		}
 
-    	return redirect('createTournament')->with('titleTournament', $input['nom']);
+        $page = 'manageTournament/'.$tournament->id;
+        return redirect($page)->with('tournament', $tournament);
     }
     
 }

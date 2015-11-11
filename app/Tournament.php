@@ -38,4 +38,9 @@ class Tournament extends Model
     {
     	return $this->hasMany('App\Equipe');
     }
+
+    public function showAllTournament()
+    {
+        return Tournament::all();
+    }
 }

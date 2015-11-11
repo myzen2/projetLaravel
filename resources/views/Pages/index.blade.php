@@ -7,6 +7,10 @@
 Bienvenue sur notre site. Avec nous, créez et gérez rapidement et facilement votre manifestation sportive.
 </p>
 
+<p>
+	<a href="listAllTournaments" title="Manager tournoi">Gestion des tournois</a>
+</p>
+
 {!! Form::open(['url' => '']) !!}
 
 		<div class="form-group">
