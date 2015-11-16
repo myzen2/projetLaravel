@@ -55,8 +55,16 @@ class CreateTournamentController extends Controller
             'pauseFin' => 'required|date_format:H:i'
         ]);
 
-        if ($validator->fails()) {
-            return view('Pages.formCreateTournament')->withErrors($validator)->withInput(Input::all());
-        }
+    	$tournament = Tournament::create($input);
+
+    	$equipe = new Equipe;
+
+		foreach ($input['equipe'] as $value) 
+		{
+			Equipe::updateEquipe($value, $tournament->id);
+		}
+
+        $page = 'manageTournament/'.$tournament->id;
+        return redirect($page)->with('tournament', $tournament);
     }
 }
