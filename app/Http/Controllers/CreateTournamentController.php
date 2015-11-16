@@ -16,8 +16,7 @@ class CreateTournamentController extends Controller
     
     public function getTournament(Request $request)
     {
-    	$titleTournament = session('titleTournament');
-
+        $titleTournament = session('titleTournament');
         $data = array(
                 'titleTournament' => $titleTournament,
                 'lieu' => "",
@@ -32,10 +31,8 @@ class CreateTournamentController extends Controller
                 'pauseDebut' => "",
                 'pauseFin' => ""
             );
-
-    	if($titleTournament == "") return redirect('/');
-
-    	return view('Pages.formCreateTournament')->with($data);
+        if($titleTournament == "") return redirect('/');
+        return view('Pages.formCreateTournament')->with($data);
     }
 
     public function postTournament(Request $request)
@@ -55,15 +52,17 @@ class CreateTournamentController extends Controller
             'pauseFin' => 'required|date_format:H:i'
         ]);
 
-    	$tournament = Tournament::create($input);
+        if ($validator->fails()) {
+            return view('Pages.formCreateTournament')->withErrors($validator)->withInput(Input::all());
+        }
 
-    	$equipe = new Equipe;
-
-		foreach ($input['equipe'] as $value) 
-		{
-			Equipe::updateEquipe($value, $tournament->id);
-		}
-
+        $input = Input::all();
+        $tournament = Tournament::create($input);
+        $equipe = new Equipe;
+        foreach ($input['equipe'] as $value) 
+        {
+            Equipe::updateEquipe($value, $tournament->id);
+        }
         $page = 'manageTournament/'.$tournament->id;
         return redirect($page)->with('tournament', $tournament);
     }
