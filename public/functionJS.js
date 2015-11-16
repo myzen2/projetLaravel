@@ -82,3 +82,12 @@ $(function(){
 		}
 	});
 });
+
+function deleteTournament($id)
+{
+	var r = confirm("Etes-vous sûr de vouloir supprimer le tournoi ?");
+
+	if (r == true) {
+	    // Delete tournament $id
+	}
+}

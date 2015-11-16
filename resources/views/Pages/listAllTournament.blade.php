@@ -26,7 +26,7 @@
 			<tr>
 				<td>{{ $t->nom }}</td>
 				<td><a href="manageTournament/{{ $t->id }}" title="Modification">Modification</a></td>
-				<td><a href="" title="Supprimer">Supprimer</a></td>
+				<td><a href="" title="Supprimer" onclick="deleteTournament({{ $t->id }});">Supprimer</a></td>
 			</tr>
 			@endforeach
 		</table>
