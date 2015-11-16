@@ -33,7 +33,7 @@
 
 			<footer class="row col-sm-12">
 				<div class="panel panel-body">
-					<p>Tous droits réservés par Dista et Jesh</p>
+					<p>Tous droits réservés par Dista, Jesh et Burri</p>
 				</div>
 			</footer>
 

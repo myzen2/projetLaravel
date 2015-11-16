@@ -52,18 +52,59 @@ class CreateTournamentController extends Controller
             'pauseFin' => 'required|date_format:H:i'
         ]);
 
-        if ($validator->fails()) {
+        $input = Input::all();
+
+        if(isset($input['id']))
+        {
+            $tournoi = Tournament::find($input['id']);
+            $tournoi->changeValueInput($input);
+            $tournoi->save();
+            return redirect('listAllTournaments');
+        }
+
+        if ($validator->fails()) 
+        {
             return view('Pages.formCreateTournament')->withErrors($validator)->withInput(Input::all());
         }
 
-        $input = Input::all();
         $tournament = Tournament::create($input);
         $equipe = new Equipe;
         foreach ($input['equipe'] as $value) 
         {
             Equipe::updateEquipe($value, $tournament->id);
         }
+
         $page = 'manageTournament/'.$tournament->id;
         return redirect($page)->with('tournament', $tournament);
+    }
+
+    public function updateTournament($id)
+    {
+        $tournament = Tournament::find($id);
+
+        $data = array(
+                'id' => $tournament['id'],
+                'titleTournament' => $tournament['nom'],
+                'lieu' => $tournament['lieu'],
+                'adresse' => $tournament['adresse'],
+                'date' =>  $tournament['date'],
+                'nbEquipe' => $tournament['nbEquipe'],
+                'typeTournoi' => $tournament['typeTournoi'],
+                'nbGroupe' => $tournament['nbGroupe'],
+                'nbTerrain' => $tournament['nbTerrain'],
+                'tempsMatch' => $tournament['tempsMatch'],
+                'tempsEntreMatch' => $tournament['tempsEntreMatch'],
+                'pauseDebut' => $tournament['pauseDebut'],
+                'pauseFin' => $tournament['pauseFin']
+            );
+
+        return view('Pages.formCreateTournament')->with($data);
+    }
+
+    public function deleteTournament($id)
+    {
+        $tournament = Tournament::find($id);
+        $tournament->delete();
+        return redirect('listAllTournaments');
     }
 }

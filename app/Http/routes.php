@@ -17,6 +17,9 @@ Route::post('/', 'PagesController@showForm');
 Route::get('/createTournament', 'CreateTournamentController@getTournament');
 Route::post('/createTournament', 'CreateTournamentController@postTournament');
 
-Route::get('/manageTournament/{n}', 'PagesController@showManagmentTournament');
+Route::get('/updateTournament/{n}', 'CreateTournamentController@updateTournament');
+Route::get('/deleteTournament/{n}', 'CreateTournamentController@deleteTournament');
+
+Route::get('/manageTournament/{n}', 'PagesController@showActualTournament');
 
 Route::get('/listAllTournaments', 'PagesController@showListAllTournament');

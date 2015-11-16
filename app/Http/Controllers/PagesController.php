@@ -22,16 +22,15 @@ class PagesController extends Controller
         return redirect('createTournament')->with('titleTournament', $titleTournament);
     }
 
-    public function showManagmentTournament($id)
-    {
-        $tournament = Tournament::find($id);
-
-        return view('Pages.managementTournament')->with('tournament', $tournament);
-    }
-
     public function showListAllTournament()
     {
         $tournaments = Tournament::all();
         return view('Pages.listAllTournament')->with('tournaments', $tournaments);
+    }
+
+    public function showActualTournament($id)
+    {
+        $tournament = Tournament::find($id);
+        return view('Pages.manageTournament')->with('tournament', $tournament);
     }
 }

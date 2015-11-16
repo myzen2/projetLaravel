@@ -44,15 +44,17 @@
 			{!! Form::input('date', 'date', $date, array('class' => 'form-control')) !!}
 		</div>
 
-		<div class="form-group" id="equipeBox">
-			{!! Form::label('nbEquipe', 'Nombre d\'équipes :') !!}
-			{!! Form::input('number', 'nbEquipe', $nbEquipe, array('min' => '2', 'max' => '24', 'onchange' => 'changeNbEquipe()', 'class' => 'form-control')) !!}
-		</div>
+		@if(!isset($id))
+			<div class="form-group" id="equipeBox">
+				{!! Form::label('nbEquipe', 'Nombre d\'équipes :') !!}
+				{!! Form::input('number', 'nbEquipe', $nbEquipe, array('min' => '2', 'max' => '24', 'onchange' => 'changeNbEquipe()', 'class' => 'form-control')) !!}
+			</div>
 
-		<div class="form-group">
-			{!! Form::label('typeTournoi', 'Type de tournoi :') !!}
-			{!! Form::select('typeTournoi', array('0' => "Tournoi avec groupe", '1' => 'Elimination direct'), $typeTournoi, array('onchange' => 'changeGroupe()', 'class' => 'form-control')) !!}
-		</div>
+			<div class="form-group">
+				{!! Form::label('typeTournoi', 'Type de tournoi :') !!}
+				{!! Form::select('typeTournoi', array('0' => "Tournoi avec groupe", '1' => 'Elimination direct'), $typeTournoi, array('onchange' => 'changeGroupe()', 'class' => 'form-control')) !!}
+			</div>
+		@endif
 
 		<div class="form-group" id="inputGroupe">
 			{!! Form::label('nbGroupe', 'Nombre de groupe :') !!}
@@ -86,6 +88,10 @@
 		</div>
 
 		{!! Form::input('hidden', 'nom',  $titleTournament ) !!}
+
+		@if(isset($id))
+			{!! Form::input('hidden', 'id',  $id ) !!}
+		@endif
 
 	{!! Form::close() !!}
 @stop

@@ -24,6 +24,17 @@ class Tournament extends Model
             'pauseFin'
     ];
 
+    public function changeValueInput($input)
+    {
+        foreach ($input as $key => $value) 
+        {   
+            if(in_array($key, $this->fillable))
+            {
+                $this->attributes[$key] = $value;                
+            }
+        }
+    }
+
     public function setPauseDebut($date)
     {
     	$this->attributes['pauseDebut'] = Carbon::createFromFormat('H:i', $date);
