@@ -9,7 +9,34 @@
 </head>
 	<body>
 		<div class="container">
-			@yield('content')
+
+			<header class="row col-sm-12">
+	        	<div class="page-header">
+	          		<h1>Générateur de tournoi  <img src="sportsIcon.png" class="pull-right" height="50px"></h1>
+	        	</div>
+	      	</header>
+
+	      	<div class="row col-sm-12">
+				@yield('menu')
+
+				<section class="col-sm-10">
+				 	<div class="panel panel-default">
+			 			<div class="panel-heading">
+				    		<h3 class="panel-title">@yield('contentTitle')</h3>
+				        </div>
+			        	<div class="panel-body">
+				    		@yield('content')
+				        </div>
+					</div>
+				</section>
+			</div>
+
+			<footer class="row col-sm-12">
+				<div class="panel panel-body">
+					<p>Tous droits réservés par Dista et Jesh</p>
+				</div>
+			</footer>
+
 		</div>
 	</body>
 </html>

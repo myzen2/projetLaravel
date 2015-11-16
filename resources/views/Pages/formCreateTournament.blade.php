@@ -1,23 +1,25 @@
 @extends('app')
 
+@if ($errors->any())
+	{{--*/ $titleTournament = Input::get('nom') /*--}}
+	{{--*/ $lieu = Input::get('lieu') /*--}}
+	{{--*/ $adresse = Input::get('adresse') /*--}}
+	{{--*/ $date  =  Input::get('date') /*--}}
+	{{--*/ $nbEquipe = Input::get('nbEquipe') /*--}}
+	{{--*/ $typeTournoi = Input::get('typeTournoi') /*--}}
+	{{--*/ $nbGroupe = Input::get('nbGroupe') /*--}}
+	{{--*/ $nbTerrain = Input::get('nbTerrain') /*--}}
+	{{--*/ $tempsMatch = Input::get('tempsMatch') /*--}}
+	{{--*/ $tempsEntreMatch = Input::get('tempsEntreMatch') /*--}}
+	{{--*/ $pauseDebut = Input::get('pauseDebut') /*--}}
+	{{--*/ $pauseFin = Input::get('pauseFin') /*--}}
+@endif
+
+@section('contentTitle')
+	Création du tournoi : {{ $titleTournament }}
+@stop
+
 @section('content')
-	@if ($errors->any())
-		{{--*/ $titleTournament = Input::get('nom') /*--}}
-		{{--*/ $lieu = Input::get('lieu') /*--}}
-		{{--*/ $adresse = Input::get('adresse') /*--}}
-		{{--*/ $date  =  Input::get('date') /*--}}
-		{{--*/ $nbEquipe = Input::get('nbEquipe') /*--}}
-		{{--*/ $typeTournoi = Input::get('typeTournoi') /*--}}
-		{{--*/ $nbGroupe = Input::get('nbGroupe') /*--}}
-		{{--*/ $nbTerrain = Input::get('nbTerrain') /*--}}
-		{{--*/ $tempsMatch = Input::get('tempsMatch') /*--}}
-		{{--*/ $tempsEntreMatch = Input::get('tempsEntreMatch') /*--}}
-		{{--*/ $pauseDebut = Input::get('pauseDebut') /*--}}
-		{{--*/ $pauseFin = Input::get('pauseFin') /*--}}
-	@endif
-
-	<h1>Création du tournoi : {{ $titleTournament }}</h1>
-
 	@if ($errors->any())
 		<ul class="alert-danger">
 	        @foreach($errors->all() as $e)
@@ -86,8 +88,4 @@
 		{!! Form::input('hidden', 'nom',  $titleTournament ) !!}
 
 	{!! Form::close() !!}
-
-	<script type="text/javascript">
-		changeGroupe();
-	</script>
 @stop

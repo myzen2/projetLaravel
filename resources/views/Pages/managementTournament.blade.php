@@ -1,7 +1,9 @@
 @extends('app')
 
-@section('content')
+@section('contentTitle')
+	Gestion du tournoi : {{ $tournament->nom }}
+@stop
 
-	<h1>Gestion du tournoi : {{ $tournament->nom }}</h1>
-
+@section('content')     
+	<!-- Corps -->
 @stop
