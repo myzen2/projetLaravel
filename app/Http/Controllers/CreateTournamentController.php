@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Tournament;
 use App\Equipe;
 use App\Http\Requests\TournamentRequest;
+use Validator;
+use Input;
 
 class CreateTournamentController extends Controller
 {
@@ -16,24 +18,45 @@ class CreateTournamentController extends Controller
     {
     	$titleTournament = session('titleTournament');
 
+        $data = array(
+                'titleTournament' => $titleTournament,
+                'lieu' => "",
+                'adresse' => "",
+                'date' =>  date('Y-m-d'),
+                'nbEquipe' => 2,
+                'typeTournoi' => 0,
+                'nbGroupe' => 2,
+                'nbTerrain' => 1,
+                'tempsMatch' => 1,
+                'tempsEntreMatch' => 1,
+                'pauseDebut' => "",
+                'pauseFin' => ""
+            );
+
     	if($titleTournament == "") return redirect('/');
 
-    	return view('Pages.formCreateTournament')->with('titleTournament', $titleTournament);
+    	return view('Pages.formCreateTournament')->with($data);
     }
 
-    public function postTournament(TournamentRequest $request)
+    public function postTournament(Request $request)
     {
-    	$input = $request->all();
+       $validator = Validator::make($request->all(), [
+            'nom' => 'required',
+            'lieu' => 'required',
+            'adresse' => 'required',
+            'nbEquipe' => 'required',
+            'nbTerrain' => 'required',
+            'nbGroupe' => 'required',
+            'tempsMatch' => 'required',
+            'tempsEntreMatch' => 'required',
+            'typeTournoi' => 'required',
+            'date' => 'required|date',
+            'pauseDebut' => 'required|date_format:H:i',
+            'pauseFin' => 'required|date_format:H:i'
+        ]);
 
-    	$tournament = Tournament::create($input);
-
-    	$equipe = new Equipe;
-		foreach ($input['equipe'] as $value) 
-		{
-			Equipe::updateEquipe($value, $tournament->id);
-		}
-
-    	return redirect('createTournament')->with('titleTournament', $input['nom']);
+        if ($validator->fails()) {
+            return view('Pages.formCreateTournament')->withErrors($validator)->withInput(Input::all());
+        }
     }
-    
 }

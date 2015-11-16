@@ -17,7 +17,7 @@ class PagesController extends Controller
 
     public function showForm()
     {
-    	$titleTournament = Request::get('title');
+    	$titleTournament = Request::get('nom');
 
         return redirect('createTournament')->with('titleTournament', $titleTournament);
     }

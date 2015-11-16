@@ -10,14 +10,14 @@ Bienvenue sur notre site. Avec nous, créez et gérez rapidement et facilement v
 {!! Form::open(['url' => '']) !!}
 
 		<div class="form-group">
-			{!! Form::label('title', 'Nom du tournoi') !!}
-			{!! Form::text('title', null, ['class' => 'form-control']) !!}
+			{!! Form::label('nom', 'Nom du tournoi') !!}
+			{!! Form::text('nom', null, ['class' => 'form-control']) !!}
 		</div>
 
 		<div class="form-group">
 			{!! Form::submit('Créer tournoi', ['class' => 'btn-primary form-control']) !!}
 		</div>
 
-	{!! Form::close() !!}
+{!! Form::close() !!}
 
 @stop
