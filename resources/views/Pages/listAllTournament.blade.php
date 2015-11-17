@@ -18,6 +18,7 @@
 		<table class="table">
 			<tr>
 				<th>Nom du tournoi</th>
+				<th>Gestion</th>
 				<th>Modification</th>
 				<th>Supprimer</th>
 			</tr>
@@ -25,8 +26,9 @@
 			@foreach ($tournaments as $t)
 			<tr>
 				<td>{{ $t->nom }}</td>
+				<td><a href="manageTournament/{{ $t->id }}" title="Gestion">Gestion</a></td>
 				<td><a href="updateTournament/{{ $t->id }}" title="Modification">Modification</a></td>
-				<td><a href="deleteTournament/{{ $t->id }}" title="Supprimer" onclick="deleteTournament({{ $t->id }});">Supprimer</a></td>
+				<td><a title="Supprimer" onclick="deleteTournament({{ $t->id }});" style="cursor: pointer;">Supprimer</a></td>
 			</tr>
 			@endforeach
 		</table>

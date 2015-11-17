@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Request;
 use App\Tournament;
+use App\Equipe;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -32,5 +33,12 @@ class PagesController extends Controller
     {
         $tournament = Tournament::find($id);
         return view('Pages.manageTournament')->with('tournament', $tournament);
+    }
+
+    public function creationGroupsTournament($id)
+    {
+        $tournament = Tournament::find($id);
+        $equipes = Equipe::where('tournament_id', '=', $id)->get();
+        return view('Pages.createGroup')->with('tournament', $tournament)->with('equipes', $equipes);
     }
 }
