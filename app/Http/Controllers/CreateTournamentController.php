@@ -16,9 +16,9 @@ class CreateTournamentController extends Controller
     
     public function getTournament(Request $request)
     {
-        $titleTournament = session('titleTournament');
+        $titleTournament = session('nom');
         $data = array(
-                'titleTournament' => $titleTournament,
+                'nom' => $titleTournament,
                 'lieu' => "",
                 'adresse' => "",
                 'date' =>  date('Y-m-d'),
@@ -37,6 +37,16 @@ class CreateTournamentController extends Controller
 
     public function postTournament(Request $request)
     {
+        $input = $request->all();
+
+        if(isset($input['id']))
+        {
+            $tournoi = Tournament::find($input['id']);
+            $tournoi->fill($input);
+            $tournoi->save();
+            return redirect('listAllTournaments');
+        }
+
        $validator = Validator::make($request->all(), [
             'nom' => 'required',
             'lieu' => 'required',
@@ -51,16 +61,6 @@ class CreateTournamentController extends Controller
             'pauseDebut' => 'required|date_format:H:i',
             'pauseFin' => 'required|date_format:H:i'
         ]);
-
-        $input = Input::all();
-
-        if(isset($input['id']))
-        {
-            $tournoi = Tournament::find($input['id']);
-            $tournoi->changeValueInput($input);
-            $tournoi->save();
-            return redirect('listAllTournaments');
-        }
 
         if ($validator->fails()) 
         {
@@ -80,25 +80,7 @@ class CreateTournamentController extends Controller
 
     public function updateTournament($id)
     {
-        $tournament = Tournament::find($id);
-
-        $data = array(
-                'id' => $tournament['id'],
-                'titleTournament' => $tournament['nom'],
-                'lieu' => $tournament['lieu'],
-                'adresse' => $tournament['adresse'],
-                'date' =>  $tournament['date'],
-                'nbEquipe' => $tournament['nbEquipe'],
-                'typeTournoi' => $tournament['typeTournoi'],
-                'nbGroupe' => $tournament['nbGroupe'],
-                'nbTerrain' => $tournament['nbTerrain'],
-                'tempsMatch' => $tournament['tempsMatch'],
-                'tempsEntreMatch' => $tournament['tempsEntreMatch'],
-                'pauseDebut' => $tournament['pauseDebut'],
-                'pauseFin' => $tournament['pauseFin']
-            );
-
-        return view('Pages.formCreateTournament')->with($data);
+        return view('Pages.formCreateTournament')->with(Tournament::find($id)->toArray());
     }
 
     public function deleteTournament($id)

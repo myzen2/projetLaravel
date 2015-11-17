@@ -1,7 +1,7 @@
 @extends('app')
 
 @if ($errors->any())
-	{{--*/ $titleTournament = Input::get('nom') /*--}}
+	{{--*/ $nom = Input::get('nom') /*--}}
 	{{--*/ $lieu = Input::get('lieu') /*--}}
 	{{--*/ $adresse = Input::get('adresse') /*--}}
 	{{--*/ $date  =  Input::get('date') /*--}}
@@ -16,7 +16,7 @@
 @endif
 
 @section('contentTitle')
-	Création du tournoi : {{ $titleTournament }}
+	Création du tournoi : {{ $nom }}
 @stop
 
 @section('content')
@@ -83,11 +83,16 @@
 			{!! Form::input('time', 'pauseFin', $pauseFin, array('class' => 'form-control')) !!}
 		</div>
 
+		<?php
+			if(isset($id)) $btnType = 'Modifier tournoi';
+			else $btnType = 'Créer tournoi';
+		?>
+
 		<div class="form-group">
-			{!! Form::submit('Créer tournoi', ['class' => 'btn-primary form-control']) !!}
+			{!! Form::submit($btnType, ['class' => 'btn-primary form-control']) !!}
 		</div>
 
-		{!! Form::input('hidden', 'nom',  $titleTournament ) !!}
+		{!! Form::input('hidden', 'nom',  $nom ) !!}
 
 		@if(isset($id))
 			{!! Form::input('hidden', 'id',  $id ) !!}
