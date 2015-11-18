@@ -1,5 +1,7 @@
 @extends('app')
 
+<script type="text/javascript" src="../functionJS.js"></script>
+
 @section('menu')
 	<nav class="col-sm-2">          
 		<ul class="nav nav-pills nav-stacked">
@@ -17,18 +19,16 @@
 	<div class="table-responsive"> 
 		<table class="table">
 			<tr>
-				<th>Nom du tournoi</th>
-				<th>Gestion</th>
+				<th>Nom d'équipe</th>
 				<th>Modification</th>
 				<th>Supprimer</th>
 			</tr>
 			
-			@foreach ($tournaments as $t)
+			@foreach ($equipes as $e)
 			<tr>
-				<td>{{ $t->nom }}</td>
-				<td><a href="manageTournament/{{ $t->id }}" title="Gestion">Gestion</a></td>
-				<td><a href="updateTournament/{{ $t->id }}" title="Modification">Modification</a></td>
-				<td><a href="#" title="Supprimer" onclick="deleteTournament({{ $t->id }});">Supprimer</a></td>
+				<td>{{ $e->nom }}</td>
+				<td><a href="/updateTeam/{{ $e->id }}" title="Modification">Modification</a></td>
+				<td><a href="#" title="Supprimer" onclick="deleteTeam({{ $e->id }});">Supprimer</a></td>
 			</tr>
 			@endforeach
 		</table>

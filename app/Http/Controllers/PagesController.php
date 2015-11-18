@@ -37,8 +37,13 @@ class PagesController extends Controller
 
     public function creationGroupsTournament($id)
     {
-        $tournament = Tournament::find($id);
+        /*$tournament = Tournament::with('equipes')->find($id);
+        return view('Pages.createGroup', compact('tournament'));*/
+    }
+
+    public function showListAllTeams($id)
+    {
         $equipes = Equipe::where('tournament_id', '=', $id)->get();
-        return view('Pages.createGroup')->with('tournament', $tournament)->with('equipes', $equipes);
+        return view('Pages.listAllTeams')->with('equipes', $equipes);
     }
 }

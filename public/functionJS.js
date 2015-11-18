@@ -88,6 +88,15 @@ function deleteTournament($id)
 	var r = confirm("Etes-vous sûr de vouloir supprimer le tournoi ?");
 
 	if (r == true) {
-	    window.location.href = 'deleteTournament/' + $id;
+	    window.location.href = '/deleteTournament/' + $id;
+	}
+}
+
+function deleteTeam($id)
+{
+	var r = confirm("Etes-vous sûr de vouloir supprimer cette équipe ?");
+
+	if (r == true) {
+	    window.location.href = '/deleteTeam/' + $id;
 	}
 }

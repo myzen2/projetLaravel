@@ -87,6 +87,6 @@ class CreateTournamentController extends Controller
     {
         $tournament = Tournament::find($id);
         $tournament->delete();
-        return redirect('listAllTournaments');
+        return redirect('/listAllTournaments');
     }
 }

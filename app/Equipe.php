@@ -8,6 +8,16 @@ class Equipe extends Model
 {
     protected $table = 'team';
 
+    protected $fillable = [
+            'nom',
+            'capitaine',
+            'ville',
+            'npa',
+            'adresse',
+            'email',
+            'telephone'
+    ];
+
     public $timestamps = false;
 
     public function tournament()
