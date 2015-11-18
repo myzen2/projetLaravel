@@ -8,10 +8,15 @@
 	{{--*/ $npa = Input::get('npa') /*--}}
 	{{--*/ $email = Input::get('email') /*--}}
 	{{--*/ $telephone = Input::get('nbGroupe') /*--}}
+	{{--*/ $tournament_id = Input::get('tournament_id') /*--}}
 @endif
 
 @section('contentTitle')
-	Modification de l'équipe : {{ $nom }}
+	@if(isset($id))
+		Modification de l'équipe : {{ $nom }}
+	@else
+		Création d'une équipe
+	@endif
 @stop
 
 @section('content')
@@ -23,7 +28,7 @@
 		</ul>		
 	@endif
 
-	{!! Form::open(['url' => '/updateTeam/'.$id]) !!}
+	{!! Form::open(['url' => '/createTeam']) !!}
 		<div class="form-group">
 			{!! Form::label('nom', 'Nom :') !!}
 			{!! Form::text('nom', $nom, ['class' => 'form-control']) !!}
@@ -59,11 +64,20 @@
 			{!! Form::text('telephone', $telephone, ['class' => 'form-control']) !!}
 		</div>
 
+		<?php
+			if(isset($id)) $btnType = 'Modifier équipe';
+			else $btnType = 'Créer équipe';
+		?>
+
 		<div class="form-group">
-			{!! Form::submit('Modifier équipe', ['class' => 'btn-primary form-control']) !!}
+			{!! Form::submit($btnType, ['class' => 'btn-primary form-control']) !!}
 		</div>
 		
-		{!! Form::input('hidden', 'id',  $id ) !!}
+		{!! Form::input('hidden', 'tournament_id',  $tournament_id ) !!}
+
+		@if(isset($id))
+			{!! Form::input('hidden', 'id',  $id ) !!}
+		@endif
 
 	{!! Form::close() !!}
 @stop

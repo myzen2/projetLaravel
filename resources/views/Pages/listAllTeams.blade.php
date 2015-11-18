@@ -27,10 +27,14 @@
 			@foreach ($equipes as $e)
 			<tr>
 				<td>{{ $e->nom }}</td>
-				<td><a href="/updateTeam/{{ $e->id }}" title="Modification">Modification</a></td>
-				<td><a href="#" title="Supprimer" onclick="deleteTeam({{ $e->id }});">Supprimer</a></td>
+				<td><a href="/updateTeam/{{ $e->id }}" title="Modification"><span class="glyphicon glyphicon-pencil"></span> Modification</a></td>
+				<td><a href="#" title="Supprimer" onclick="deleteTeam({{ $e->id }});"><span class="glyphicon glyphicon-trash"></span> Supprimer</a></td>
 			</tr>
 			@endforeach
 		</table>
+
+		<ul class="nav nav-pills nav-justified">
+			<li><a href="/createTeam/{{ $tournamentId }}" title="Création équipe" ><span class="glyphicon glyphicon-plus"></span> Ajouter équipe</a></li>
+		</ul>
 	</div>
 @stop

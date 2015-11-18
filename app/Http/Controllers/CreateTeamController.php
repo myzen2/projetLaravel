@@ -16,17 +16,36 @@ class CreateTeamController extends Controller
     
     public function getTeam($id)
     {
-        return view('Pages.formUpdateTeam')->with(Equipe::find($id)->toArray());
+        return view('Pages.formCreateTeam')->with(Equipe::find($id)->toArray());
     }
 
     public function postTeam(Request $request)
     {
         $input = $request->all();
 
-        $team = Equipe::find($input['id']);
-        $team->fill($input);
-        $team->save();
-        return redirect('/listAllTeams/'.$team->tournament_id);
+        if(isset($input['id']))
+        {
+            $team = Equipe::find($input['id']);
+            $team->fill($input);
+            $team->save();
+
+            return redirect('/listAllTeams/'. $team->tournament_id);
+        }
+
+        $validator = Validator::make($input, [
+            'nom' => 'required'
+        ]);
+
+        if ($validator->fails()) 
+        {
+            return view('Pages.formCreateTeam')->withErrors($validator)->withInput($input);
+        }
+
+        $equipe = new Equipe();
+        $equipe->fill($input);
+        $equipe->save();
+
+        return redirect('/listAllTeams/'.$input['tournament_id']);
     }
 
     public function deleteTeam($id)
@@ -35,5 +54,21 @@ class CreateTeamController extends Controller
         $idTournament = $team->tournament_id;
         $team->delete();
         return redirect('/listAllTeams/'.$idTournament);
+    }
+
+    public function createTeam($id)
+    {
+        $data = array(
+                'nom' => "",
+                'capitaine' => "",
+                'ville' => "",
+                'adresse' => "",
+                'npa' => "",
+                'email' => "",
+                'telephone' => "",
+                'tournament_id' => $id
+            );
+
+        return view('Pages.formCreateTeam')->with($data);
     }
 }

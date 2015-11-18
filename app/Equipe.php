@@ -15,7 +15,8 @@ class Equipe extends Model
             'npa',
             'adresse',
             'email',
-            'telephone'
+            'telephone',
+            'tournament_id'
     ];
 
     public $timestamps = false;

@@ -44,6 +44,6 @@ class PagesController extends Controller
     public function showListAllTeams($id)
     {
         $equipes = Equipe::where('tournament_id', '=', $id)->get();
-        return view('Pages.listAllTeams')->with('equipes', $equipes);
+        return view('Pages.listAllTeams')->with('equipes', $equipes)->with('tournamentId', $id);
     }
 }
