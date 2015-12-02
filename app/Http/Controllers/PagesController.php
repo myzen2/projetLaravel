@@ -64,7 +64,9 @@ class PagesController extends Controller
     public function showPlanning($id)
     {
         $tournament = Tournament::find($id);
-        return view('Pages.showPlanning')->with('tournament', $tournament);
+        $teams = Equipe::where('tournament_id', '=', $id)->get();
+        
+        return view('Pages.showPlanning')->with('tournament', $tournament)->with('teams', $teams);
     }
 
 
