@@ -27,9 +27,9 @@ class CreateTournamentController extends Controller
                 'typeFinales' => 0,
                 'nbGroupe' => 2,
                 'nbTerrain' => 1,
-                'heureDebutTournoi' => "",
                 'tempsMatch' => 1,
                 'tempsEntreMatch' => 1,
+                'heureDebutTournoi' => "",
                 'pauseDebut' => "",
                 'pauseFin' => ""
             );

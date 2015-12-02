@@ -21,7 +21,7 @@ class Tournament extends Model
             'typeTournoi',
             'typeFinales',
             'date',
-            'heureDebutTournoi'
+            'heureDebutTournoi',
             'pauseDebut',
             'pauseFin'
     ];
