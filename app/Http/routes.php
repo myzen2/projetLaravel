@@ -22,6 +22,8 @@ Route::get('/deleteTournament/{n}', 'CreateTournamentController@deleteTournament
 
 Route::get('/manageTournament/{n}', 'PagesController@showActualTournament');
 
+Route::get('/treeTournament/{n}', 'PagesController@showTreeTournament');
+
 Route::get('/listAllTournaments', 'PagesController@showListAllTournament');
 Route::get('/createGroup/{n}', 'PagesController@creationGroupsTournament');
 
