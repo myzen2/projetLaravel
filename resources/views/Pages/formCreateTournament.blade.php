@@ -55,7 +55,7 @@
 		@if(!isset($id))
 			<div class="form-group" id="equipeBox">
 				{!! Form::label('nbEquipe', 'Nombre d\'équipes :') !!}
-				{!! Form::input('number', 'nbEquipe', $nbEquipe, array('min' => '2', 'max' => '24', 'onchange' => 'changeNbEquipe()', 'class' => 'form-control')) !!}
+				{!! Form::input('number', 'nbEquipe', $nbEquipe, array('min' => '2', 'max' => '32', 'onchange' => 'changeNbEquipe()', 'class' => 'form-control')) !!}
 			</div>
 
 			<div class="form-group">

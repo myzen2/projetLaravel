@@ -1,10 +1,6 @@
 var equipe = [];
 var lastNumber = 0;
 
-$('document').ready(function(){
-	addEquipe();
-});
-
 function changeNbEquipe()
 {
 	var val = document.getElementById('nbEquipe').value;
@@ -12,16 +8,16 @@ function changeNbEquipe()
 	{
 		if(val > lastNumber)
 		{
-			addEquipe(val);
+			addEquipeToTournament(val);
 		}
 		else
 		{
-			removeEquipe(val);
+			removeEquipeFromTournament(val);
 		}
 	}
 }
 
-function addEquipe(val)
+function addEquipeToTournament(val)
 {
 	var nbEquipe = document.getElementById('nbEquipe').value;
 	var div = document.getElementById('equipeBox');
@@ -41,7 +37,7 @@ function addEquipe(val)
 	}
 }
 
-function removeEquipe(val)
+function removeEquipeFromTournament(val)
 {
 	var div = document.getElementById('equipeBox');
 	var nbEquipe = document.getElementById('nbEquipe').value;

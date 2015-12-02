@@ -28,7 +28,6 @@ $(function() {
 
 @section('content')
 <div id="save" style="color:#0000FF">
-	salut
   <script type="text/javascript">
   var saveData = {
       teams : [

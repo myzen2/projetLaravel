@@ -93,6 +93,5 @@ class PagesController extends Controller
     {
         $createtree = Equipe::where('tournament_id', '=', $id)->get();
         return view('Pages.treeTournament')->with('equipes', $createtree)->with('tournamentId', $id);
-
     }
 }
