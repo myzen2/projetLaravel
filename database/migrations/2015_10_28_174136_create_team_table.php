@@ -22,6 +22,10 @@ class CreateTeamTable extends Migration
             $table->string('adresse', 100);
             $table->string('email', 150);
             $table->string('telephone', 12);
+            $table->integer('numGroupe');
+            $table->integer('nbPoint');
+            $table->integer('butFait');
+            $table->integer('butSubi');
             $table->integer('tournament_id')->unsigned();
 
             $table->foreign('tournament_id')
