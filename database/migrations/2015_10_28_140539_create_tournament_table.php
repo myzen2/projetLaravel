@@ -24,6 +24,7 @@ class CreateTournamentTable extends Migration
             $table->integer('tempsMatch');
             $table->integer('tempsEntreMatch');
             $table->integer('typeTournoi');
+            $table->integer('typeFinales');
             $table->date('date');
             $table->string('heureDebutTournoi');
             $table->string('pauseDebut');

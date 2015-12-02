@@ -19,6 +19,7 @@ class Tournament extends Model
             'tempsMatch',
             'tempsEntreMatch',
             'typeTournoi',
+            'typeFinales',
             'date',
             'heureDebutTournoi'
             'pauseDebut',

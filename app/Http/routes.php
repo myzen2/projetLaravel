@@ -33,3 +33,5 @@ Route::post('/createTeam', 'CreateTeamController@postTeam');
 Route::get('/updateTeam/{n}', 'CreateTeamController@getTeam');
 Route::post('/updateTeam', 'CreateTeamController@postTeam');
 Route::get('/deleteTeam/{n}', 'CreateTeamController@deleteTeam');
+
+Route::get('/showPlanning/{n}', 'PagesController@showPlanning');
