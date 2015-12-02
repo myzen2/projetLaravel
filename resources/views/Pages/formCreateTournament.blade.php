@@ -7,8 +7,10 @@
 	{{--*/ $date  =  Input::get('date') /*--}}
 	{{--*/ $nbEquipe = Input::get('nbEquipe') /*--}}
 	{{--*/ $typeTournoi = Input::get('typeTournoi') /*--}}
+	{{--*/ $typeFinales = Input::get('typeFinales') /*--}}
 	{{--*/ $nbGroupe = Input::get('nbGroupe') /*--}}
 	{{--*/ $nbTerrain = Input::get('nbTerrain') /*--}}
+	{{--*/ $heureDebutTournoi = Input::get('heureDebutTournoi') /*--}}
 	{{--*/ $tempsMatch = Input::get('tempsMatch') /*--}}
 	{{--*/ $tempsEntreMatch = Input::get('tempsEntreMatch') /*--}}
 	{{--*/ $pauseDebut = Input::get('pauseDebut') /*--}}
@@ -62,8 +64,18 @@
 		</div>
 
 		<div class="form-group">
+			{!! Form::label('typeFinales', 'Type de finales :') !!}
+			{!! Form::select('typeFinales', array('0' => "1/16", '1' => "1/8", '2' => "1/4", '3' => "1/2", '4' => "Finale"), $typeFinales, array('class' => 'form-control')) !!}
+		</div>
+
+		<div class="form-group">
 			{!! Form::label('nbTerrain', 'Nombre de terrains :') !!}
 			{!! Form::input('number', 'nbTerrain', $nbTerrain, array('min' => '1', 'max' => '10', 'class' => 'form-control')) !!}
+		</div>
+
+		<div class="form-group">
+			{!! Form::label('heureDebutTournoi', 'Heure de début du tournoi :') !!}
+			{!! Form::input('time', 'heureDebutTournoi',  $heureDebutTournoi, array('class' => 'form-control')) !!}
 		</div>
 
 		<div class="form-group">

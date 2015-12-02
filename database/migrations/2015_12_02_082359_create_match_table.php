@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTeamTable extends Migration
+class CreateMatchTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,20 +12,14 @@ class CreateTeamTable extends Migration
      */
     public function up()
     {
-        Schema::create('team', function(Blueprint $table)
+        Schema::create('match', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->string('nom', 100);
-            $table->string('capitaine', 100);
-            $table->string('ville', 100);
-            $table->string('npa', 100);
-            $table->string('adresse', 100);
-            $table->string('email', 150);
-            $table->string('telephone', 12);
-            $table->integer('numGroupe');
-            $table->integer('nbPoint');
-            $table->integer('butFait');
-            $table->integer('butSubi');
+            $table->string('equipe1', 100);
+            $table->string('equipe2', 100);
+            $table->integer('score1');
+            $table->integer('score2');
+            $table->string('heureMatch');
             $table->integer('tournament_id')->unsigned();
 
             $table->foreign('tournament_id')
@@ -44,6 +38,6 @@ class CreateTeamTable extends Migration
      */
     public function down()
     {
-        Schema::drop('team');
+        Schema::drop('match');
     }
 }

@@ -19,10 +19,17 @@ class Tournament extends Model
             'tempsMatch',
             'tempsEntreMatch',
             'typeTournoi',
+            'typeFinales',
             'date',
+            'heureDebutTournoi',
             'pauseDebut',
             'pauseFin'
     ];
+
+    public function setDebutTournoi($date)
+    {
+        $this->attributes['heureDebutTournoi'] = Carbon::createFromFormat('H:i', $date);
+    }
 
     public function setPauseDebut($date)
     {
