@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('tree/site/jquery-ui-1.8.16/css/ui-lightness/jquery-ui-1.8.16.custom.css') }}" />
 	<link rel="stylesheet" type="text/css" href="{{ asset('tree/site/jquery.bracket-site.css') }}" />
 	<link rel="stylesheet" type="text/css" href="{{ asset('tree/jquery-bracket/dist/jquery.bracket.min.css') }}" />
-	<script type="text/javascript" src="{{ asset('tree/jquery-bracket/dist/jquery.bracket.min.js') }}"></script> 
+	<script type="text/javascript" src="{{ asset('tree/jquery-bracket/dist/jquery.bracket.min.js') }}"></script>
 
 	<script type="text/javascript">
 	$(function() {

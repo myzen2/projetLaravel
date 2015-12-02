@@ -63,10 +63,9 @@ class PagesController extends Controller
     **/
     public function showPlanning($id)
     {
-        $tournament = Tournament::find($id);
-        $teams = Equipe::where('tournament_id', '=', $id)->get();
+        $tournament = Tournament::with('equipes')->find($id);
         
-        return view('Pages.showPlanning')->with('tournament', $tournament)->with('teams', $teams);
+        return view('Pages.showPlanning')->with('tournament', $tournament)->with('teams', $tournament->equipes);
     }
 
 
@@ -78,8 +77,8 @@ class PagesController extends Controller
     **/
     public function showListAllTeams($id)
     {
-        $equipes = Equipe::where('tournament_id', '=', $id)->get();
-        return view('Pages.listAllTeams')->with('equipes', $equipes)->with('tournamentId', $id);
+        $tournament = Tournament::with('equipes')->find($id);
+        return view('Pages.listAllTeams')->with('equipes', $tournament->equipes)->with('tournamentId', $id);
     }
 
 
@@ -91,7 +90,7 @@ class PagesController extends Controller
     **/
     public function showTreeTournament($id)
     {
-        $createtree = Equipe::where('tournament_id', '=', $id)->get();
-        return view('Pages.treeTournament')->with('equipes', $createtree)->with('tournamentId', $id);
+        $tournament = Tournament::with('equipes')->find($id);
+        return view('Pages.treeTournament')->with('equipes', $tournament->equipes)->with('tournamentId', $id);
     }
 }
