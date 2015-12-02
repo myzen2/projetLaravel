@@ -53,3 +53,18 @@ class PagesController extends Controller
         return view('Pages.showPlanning')->with('tournament', $tournament);
     }
 }
+    }
+
+    public function showListAllTeams($id)
+    {
+        $equipes = Equipe::where('tournament_id', '=', $id)->get();
+        return view('Pages.listAllTeams')->with('equipes', $equipes)->with('tournamentId', $id);
+    }
+
+    public function showTreeTournament($id)
+    {
+        $createtree = Equipe::where('tournament_id', '=', $id)->get();
+        return view('Pages.treeTournament')->with('equipes', $createtree)->with('tournamentId', $id);
+
+    }
+}
