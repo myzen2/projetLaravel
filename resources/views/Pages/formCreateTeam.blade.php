@@ -1,3 +1,9 @@
+<!-- 
+	Auteurs : Assunçao Jeshon, Burri Bastien, Di Stasio Leonardo
+
+	Formulaire de création et modification d'équipe
+-->
+
 @extends('app')
 
 @if ($errors->any())
@@ -65,6 +71,10 @@
 		</div>
 
 		<?php
+			/**
+			*	Modification ou création d'équipe
+			**/
+
 			if(isset($id)) $btnType = 'Modifier équipe';
 			else $btnType = 'Créer équipe';
 		?>

@@ -1,3 +1,9 @@
+<!-- 
+	Auteurs : Assunçao Jeshon, Burri Bastien, Di Stasio Leonardo
+
+	Liste des équipes du tournoi à gérer
+-->
+
 @extends('app')
 
 <script type="text/javascript" src="../functionJS.js"></script>

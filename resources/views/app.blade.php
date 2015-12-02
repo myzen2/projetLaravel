@@ -17,9 +17,11 @@
 	        	</div>
 	      	</header>
 
+	      	<!-- Contenu central de la page (menu et contenu) -->
 	      	<div class="row col-sm-12">
-				@yield('menu')
+				@yield('menu') <!-- Template menu -->
 
+				<!-- Contenu avec titre -->
 				<section class="col-sm-10">
 				 	<div class="panel panel-default">
 			 			<div class="panel-heading">
@@ -32,6 +34,7 @@
 				</section>
 			</div>
 
+			<!-- Pied de page -->
 			<footer class="row col-sm-12">
 				<div class="panel panel-body">
 					<p>Tous droits réservés par Dista, Jesh et Burri</p>

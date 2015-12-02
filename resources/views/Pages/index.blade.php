@@ -1,3 +1,9 @@
+<!-- 
+	Auteurs : Assunçao Jeshon, Burri Bastien, Di Stasio Leonardo
+
+	Page d'accueil, création d'un tournoi
+-->
+
 @extends('app')
 
 @section('menu')

@@ -1,6 +1,10 @@
-@extends('app')
+<!-- 
+	Auteurs : Assunçao Jeshon, Burri Bastien, Di Stasio Leonardo
 
-<script type="text/javascript" src="../functionJS.js"></script>
+	Gestion du tournoi sélectionné
+-->
+
+@extends('app')
 
 @section('menu')
 	<nav class="col-sm-2">          
