@@ -19,7 +19,6 @@
 	<ul class="nav nav-pills nav-justified">
 		<!--<li><a href="/createGroup/{{ $tournament->id }}" title="Création groupes" ><span class="glyphicon glyphicon-plus"></span> Création des groupes</a></li>-->
 		<li><a href="/listAllTeams/{{ $tournament->id }}" title="Gestion des équipes" ><span class="glyphicon glyphicon-list-alt"></span> Gestion des équipes</a></li>
-		<li><a href="" title="Imprimer tournoi" ><span class="glyphicon glyphicon-print"></span> Imprimer tournoi</a></li>
 		<li><a href="/showPlanning/{{ $tournament->id }}" title="Générer planning" ><span class="glyphicon glyphicon-list-alt"></span> Générer planning</a></li>
 		<li><a href="/updateTournament/{{ $tournament->id }}" title="Modifier tournoi" ><span class="glyphicon glyphicon-pencil"></span> Modifier</a></li>
 		<li><a href="#" title="Supprimer" onclick="deleteTournament({{ $tournament->id }})"><span class="glyphicon glyphicon-trash"></span> Supprimer</a></li>
