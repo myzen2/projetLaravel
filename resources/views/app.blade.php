@@ -5,14 +5,14 @@
 	<title>Générateur de tournoi</title>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type="text/javascript" src="functionJS.js"></script>
+	<script type="text/javascript" src="{{ asset('functionJS.js') }}"></script>
 </head>
 	<body>
 		<div class="container">
 
 			<header class="row col-sm-12">
 	        	<div class="page-header">
-	          		<h1>Générateur de tournoi  <img src="sportsIcon.png" class="pull-right" height="50px"></h1>
+	          		<h1>Générateur de tournoi  <img src="{{ asset('sportsIcon.png') }}" class="pull-right" height="50px"></h1>
 	        	</div>
 	      	</header>
 
