@@ -1,23 +1,27 @@
 
 @extends('app')
 
+@section('contentTitle')
+  Arbre du tournoi
+@stop
+
+@section('menu')
+  <nav class="col-sm-2">          
+    <ul class="nav nav-pills nav-stacked">
+          <li> <a href="/"> <span class="glyphicon glyphicon-home"></span> Accueil </a> </li>
+          <li class="active"> <a href="" title="Manager tournoi"> <span class="glyphicon glyphicon-pencil"></span> Gestion des tournois </a> </li>
+      </ul>
+  </nav>
+@stop
+
+
 @section('content')
 <div id="save" style="color:#0000FF">
+  <?php $ar = array('apple', 'orange', 'banana', 'strawberry','lol','r','o','p','q'); ?>
   <script type="text/javascript">
-  var saveData = {
-      teams : [
-        ["Team 1", "Team 2"], /* first matchup */
-        ["Team 3", "Team 4"]  /* second matchup */
-      ],
-      results : [[1,0], [2,7]]
-    }
+  var ar = <?php echo json_encode(ArrayToTreeArray($ar)); ?>;
+  var saveData = { teams : ar}
 
-
-	  /* Called whenever bracket is modified
-   *
-   * data:     changed bracket object in format given to init
-   * userData: optional data given when bracket is created.
-   */
   function saveFn(data, userData) {
     var json = jQuery.toJSON(data)
     $('#saveOutput').text('POST '+userData+' '+json)
@@ -35,5 +39,47 @@
       $('#dataOutput').text(jQuery.toJSON(data))
     })
   </script>
+<?php
+function ArrayToTreeArray($array)
+{
+  $x=0;
+  $SizeArray = sizeof($array);
+    while(pow(2,$x)<sizeof($array))
+    {
+    $x++;
+    $sol = pow(2,$x)-sizeof($array); //nombre de forfeit à insérer
+    }
+    
+    if($sol%2!=0)
+    {
+    $sol--;
+    $nbforfeitgauche=$sol/2;
+    $sol++;
+    }
+    else
+    {
+    $nbforfeitgauche=$sol/2;  
+    }
+    $nbforfeitdroit = $sol-$nbforfeitgauche;
+    $inserted = array('forfeit');
+   for($i=0;$i<$nbforfeitgauche;$i++)
+   {
+     array_splice($array,2*$i,0,$inserted);
+   }
+     for($i=0;$i<$nbforfeitdroit;$i++)
+   {
+     array_splice($array,sizeof($array)-2*$i,0,$inserted);
+   }
+  for($i=0;$i<sizeof($array)/2;$i++)
+  {
+    for($j=0;$j<2;$j++)
+    {
+      $return[$i][$j]=$array[2*$i+$j];
+    }
+  }
+  return $return;
+}
+
+?>
 </div>
 @stop
