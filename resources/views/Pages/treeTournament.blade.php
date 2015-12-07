@@ -1,5 +1,5 @@
 
-@extends('app')
+@extends('appWithMenu')
 
 @section('contentTitle')
   Arbre du tournoi
@@ -17,7 +17,7 @@
 
 @section('content')
 <div id="save" style="color:#0000FF">
-  <?php $ar = array('apple', 'orange', 'banana', 'strawberry','lol','r','o','p','q'); ?>
+  <?php $ar = array('apple', 'orange', 'banana'); ?>
   <script type="text/javascript">
   var ar = <?php echo json_encode(ArrayToTreeArray($ar)); ?>;
   var saveData = { teams : ar}

@@ -4,7 +4,7 @@
 	Formulaire de création et modification d'équipe
 -->
 
-@extends('app')
+@extends('appWithoutMenu')
 
 @if ($errors->any())
 	{{--*/ $nom = Input::get('nom') /*--}}

@@ -4,7 +4,7 @@
 	Liste des équipes du tournoi à gérer
 -->
 
-@extends('app')
+@extends('appWithMenu')
 
 <script type="text/javascript" src="../functionJS.js"></script>
 

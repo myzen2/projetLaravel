@@ -4,7 +4,7 @@
 	Page d'accueil, création d'un tournoi
 -->
 
-@extends('app')
+@extends('appWithMenu')
 
 @section('menu')
 	<nav class="col-sm-2">          
