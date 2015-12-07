@@ -1,5 +1,5 @@
 
-@extends('app')
+@extends('appWithMenu')
 
 @section('contentTitle')
   Arbre du tournoi

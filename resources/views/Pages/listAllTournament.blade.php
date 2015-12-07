@@ -4,7 +4,7 @@
 	Page de listage de tous les tournois créés 
 -->
 
-@extends('app')
+@extends('appWithMenu')
 
 @section('menu')
 	<nav class="col-sm-2">          

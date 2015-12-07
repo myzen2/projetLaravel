@@ -1,4 +1,4 @@
-@extends('app')
+@extends('appWithoutMenu')
 
 @section('contentTitle')
 	Planning du tournoi : {{ $tournament->nom }}

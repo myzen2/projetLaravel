@@ -4,7 +4,7 @@
 	Page du formulaire pour la création ou modification de tournoi
 -->
 
-@extends('app')
+@extends('appWithoutMenu')
 
 @if ($errors->any())
 	{{--*/ $nom = Input::get('nom') /*--}}
