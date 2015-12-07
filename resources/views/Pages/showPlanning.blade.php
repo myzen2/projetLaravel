@@ -34,7 +34,7 @@
 			$groupes = array_chunk($members, ceil($tournament->nbEquipe / $tournament->nbGroupe));
 
 			// Generate the matchs
-			for($i=1; $i <= sizeof($groupes); $i++)
+			/*for($i=1; $i <= sizeof($groupes); $i++)
 			{
 				// do the rounds
 				$rounds = createRounds($groupes[$i - 1]);
@@ -50,6 +50,33 @@
 				}
 
 				echo $table;
+			}*/
+
+			$matchTours = array();
+			for($i=0; $i < sizeof($groupes); $i++)
+			{
+				// do the rounds
+				$rounds = createRounds($groupes[$i]);
+
+				for($j = 0; $j < sizeof($rounds); $j++)
+				{
+					if(empty($matchTours[$j]))
+						$matchTours[$j] = array();
+					array_push($matchTours[$j], $rounds[$j]);
+				}
+			}
+
+			foreach($matchTours as $groupes)
+			{
+				foreach ($groupes as $matchs) 
+				{
+					echo '<tr>';
+					foreach($matchs as $match)
+					{
+						echo "<td>Heure</td><td>".$match["Home"]." VS ".$match["Away"]."</td><td>Score</td>\n";
+					}
+					echo '</tr>';
+				}
 			}
 			?>
 		</table>

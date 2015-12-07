@@ -13,7 +13,6 @@
 	<script type="text/javascript" src="{{ asset('tree/site/syntaxhighlighter_3.0.83/scripts/shCore.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('tree/site/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('tree/site/syntaxhighlighter_3.0.83/scripts/shBrushXml.js') }}"></script>
-/>
 	<link rel="stylesheet" type="text/css" href="{{ asset('tree/jquery-bracket/dist/jquery.bracket.min.css') }}" />
 	<script type="text/javascript" src="{{ asset('tree/jquery-bracket/dist/jquery.bracket.min.js') }}"></script>
 
