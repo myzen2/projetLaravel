@@ -13,17 +13,10 @@ class Match extends Model
             'equipe2',
             'score1',
             'score2',
-            'heureMatch',
+            'heureMatchDebut',
+            'heureMatchFin',
             'tournament_id'
     ];
 
     public $timestamps = false;
-
-    public function getMatch($data)
-    {
-        $match = Match::where($data)
-                        ->first(); //Match::where($data)->get();
-        echo $match;
-        return $match;
-    }
 }

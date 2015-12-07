@@ -23,8 +23,20 @@ class PlanningController extends Controller
     public function showPlanning($id)
     {
         $tournament = Tournament::with('equipes')->find($id);
+
+        $groupes = $this->createGroups($tournament->equipes, $tournament);
+        $games = $this->generateMatchs($groupes, $tournament);
+        $newGames = array();
         
-        return view('Pages.showPlanning')->with('tournament', $tournament)->with('teams', $tournament->equipes);
+        foreach($games as $game)
+        {
+            $match = Match::firstOrCreate($game);
+            $game['score1'] = $match->score1;
+            $game['score2'] = $match->score2;
+            array_push($newGames, $game);
+        }
+
+        return view('Pages.showPlanning')->with('games', $newGames)->with('tournament', $tournament);
     }
 
     public function saveGameData(Request $request)
@@ -41,5 +53,154 @@ class PlanningController extends Controller
             $match->save();
         }
         return 'Score enregistré';
+    }
+
+    private function createGroups($teams, $tournament)
+    {
+        // create an array of teams
+        $members = array();
+        $i = 0;
+        foreach ($teams as $team) {
+            $members[$i] =  $team['nom'];
+            $i++;
+        }
+
+        // Split our array of team on a array of groupes of teams
+        $groupes = array_chunk($members, ceil($tournament->nbEquipe / $tournament->nbGroupe));
+
+        return $groupes;
+    }
+
+    private function generateMatchs($groupes, $tournament)
+    {
+        $nbOfGroupes = count($groupes);
+        $matchs = array();
+        $table = array();
+
+        /* Count the number of matchs */
+        $nbOfMatchs = 0;
+
+        for($i=0; $i < $nbOfGroupes; $i++)
+        {
+            $nbOfMatchs += (count($groupes[$i]) * (count($groupes[$i]) - 1)) / 2;
+
+            /* Add a fictive team for having a pair number of team */
+            if (count($groupes[$i])%2 != 0)
+            {
+                array_push($groupes[$i],"forfait");
+            }
+        }
+
+        /* Count the number of rounds */
+        $nbOfRound = ceil($nbOfMatchs / $tournament->nbTerrain);
+
+        $games = $this->createCombinaison($groupes);
+        $hours = $this->generateHours($tournament, $nbOfRound);
+
+        $indiceMatch = 0;
+        $assocMatch = array();
+
+        for($i=0; $i < $nbOfRound; $i++)
+        {
+            $hourEndNextGame = strtotime($hours[$i]) + (60 * $tournament->tempsMatch);
+            $table[$i][0] = $hours[$i] . " - " . date("H:i", $hourEndNextGame);
+
+            for($j = 0 ; $j < $tournament->nbTerrain; $j++)
+            {
+                if(in_array("forfait", $games[$indiceMatch]))
+                    $indiceMatch++;
+
+                $game = $games[$indiceMatch]; 
+
+                array_push($assocMatch, array('equipe1' => $game[0], 'equipe2' => $game[1], 'tournament_id' => $tournament->id, 
+                                              'heureMatchDebut' => $hours[$i],
+                                              'heureMatchFin' => date("H:i", $hourEndNextGame)));
+
+                $indiceMatch++;
+            }
+        }
+
+        return $assocMatch;
+    }
+
+    private function generateHours($tournament, $nbOfRound)
+    {
+        $hours = array();
+
+        $hours[0] = $tournament->heureDebutTournoi;
+
+        for($i=1; $i < $nbOfRound; $i++)
+        {   
+            $totalMinutes = 60 * ($tournament->tempsMatch + $tournament->tempsEntreMatch);
+            $hourNextGame = strtotime($hours[$i-1]) + $totalMinutes;
+
+            if($hourNextGame >= $tournament->pauseDebut && $hourNextGame < $tournament->pauseFin)
+            {
+                $hourNextGame = strtotime($tournament->pauseFin);
+            }
+
+            $hours[$i] = date("H:i", $hourNextGame);        
+        }
+
+        return $hours;
+    }
+
+    private function createCombinaison($groups)
+    {
+        if(count($groups) == 0)
+            return;
+
+        $sizeGroup = count($groups[0]);
+
+        $arrayCombin = array();
+
+        for($i = 0; $i < $sizeGroup; $i++)
+        {
+            for($j = 0; $j < $sizeGroup; $j++)
+            {
+                if($i != $j)
+                {
+                    if(!in_array($j . ';' . $i, $arrayCombin))
+                        array_push($arrayCombin, $i . ';' . $j);
+                }
+            }
+        }
+
+        return $this->generateMatchsCalendar($groups, $arrayCombin);
+    }
+
+    private function generateMatchsCalendar($groups, $arrayCombin)
+    {
+        $matchs = array();
+
+        $newArrayCombin = $this->sortOrderGame($arrayCombin);
+
+        foreach($newArrayCombin as $combin)
+        {
+            $c = explode(";", $combin);
+
+            foreach ($groups as $group) 
+            {
+                array_push($matchs, array($group[$c[0]], $group[$c[1]]));
+            }
+        }
+
+        return $matchs;
+    }
+
+    private function sortOrderGame($arrayCombin)
+    {
+        $newArrayCombin = array();
+        for($i = 0; $i < count($arrayCombin) / 2; $i++)
+        {
+            $lastIndice = count($arrayCombin) - $i - 1;
+
+            array_push($newArrayCombin, $arrayCombin[$i]);
+
+            if(isset($arrayCombin[$lastIndice]))
+                array_push($newArrayCombin, $arrayCombin[$lastIndice]);
+        }
+
+        return $newArrayCombin;
     }
 }

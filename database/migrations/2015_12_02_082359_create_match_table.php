@@ -19,7 +19,8 @@ class CreateMatchTable extends Migration
             $table->string('equipe2', 100);
             $table->integer('score1');
             $table->integer('score2');
-            $table->string('heureMatch');
+            $table->string('heureMatchDebut');
+            $table->string('heureMatchFin');
             $table->integer('tournament_id')->unsigned();
 
             $table->foreign('tournament_id')

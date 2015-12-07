@@ -22,20 +22,43 @@
 				    <th>Score terrain {{$i}}</th>
 				@endfor
 			</tr>
-			
-			<?php
-				include(app_path() . '\..\public\functionPHP.php');
-				$groupes = createGroups($teams, $tournament);
-				$table = generateMatchs($groupes, $tournament);
-			?>
 
-			@foreach($table as $row)
-			<tr>	
-				@foreach ($row as $cell)
-			   		<td><?php echo $cell; ?></td>
-				@endforeach
-			</tr>
-			@endforeach
+			{{--*/ $nbOfRound = ceil(count($games) / $tournament->nbTerrain) /*--}}
+			{{--*/ $indiceMatch = 0 /*--}}
+			
+			@for ($i=0; $i < $nbOfRound; $i++)
+
+				{{--*/ $heureDebut = $games[$i * $tournament->nbTerrain]['heureMatchDebut'] /*--}}
+				{{--*/ $heureFin = $games[$i * $tournament->nbTerrain]['heureMatchFin'] /*--}}
+
+				<tr>
+					<td>{{ $heureDebut }} - {{ $heureFin }}</td>
+
+				@for ($j = 0 ; $j < $tournament->nbTerrain; $j++)
+
+					@if($games[$indiceMatch]['equipe1'] == "forfait" || $games[$indiceMatch]['equipe2'] == "forfait")
+						{{--*/ $indiceMatch++ /*--}}
+					@endif
+
+					<td>{{ $games[$indiceMatch]['equipe1'] }} - {{ $games[$indiceMatch]['equipe2'] }}</td>
+
+					{{--*/ $score1 = $games[$indiceMatch]['score1'] /*--}}
+					{{--*/ $score2 = $games[$indiceMatch]['score2'] /*--}}
+					
+					<td>
+						<input type='number' id='matchIDHome{{ $indiceMatch }}' name='matchIDHome{{ $indiceMatch }}' value='{{ $score1 }}' min='0' max='100'>
+						-
+						<input type='number' id='matchIDAway{{ $indiceMatch }}' name='matchIDAway{{ $indiceMatch }}' value='{{ $score2 }}' min='0' max='100'>
+
+						<input type='button' name='saveScore' value='Sauvegarder' onclick='saveGame({{ $tournament->id }}, "{{ $games[$indiceMatch]['equipe1'] }}", "{{ $games[$indiceMatch]['equipe2'] }}", {{ $indiceMatch }}, "{{ $heureDebut }}", "{{ $heureFin }}")' />
+					</td>
+
+					{{--*/ $indiceMatch++ /*--}}
+
+				@endfor
+				</tr>
+
+			@endfor
 		</table>
 	</div>
 @stop

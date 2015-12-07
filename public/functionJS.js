@@ -97,7 +97,7 @@ function deleteTeam(id)
 	}
 }
 
-function saveGame(idTournament, team1, team2, gameNb, time)
+function saveGame(idTournament, team1, team2, gameNb, timeStart, timeEnd)
 {
 	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 	var score1 = document.getElementById('matchIDHome'+gameNb).value;
@@ -115,7 +115,8 @@ function saveGame(idTournament, team1, team2, gameNb, time)
 			 		equipe2 : team2,
 			 		score1 : score1,
 			 		score2 : score2,
-			 		heureMatch : time,
+			 		heureMatchDebut : timeStart,
+			 		heureMatchFin : timeEnd,
 			 		_token: CSRF_TOKEN
 			 },
 			 type: 'post',
