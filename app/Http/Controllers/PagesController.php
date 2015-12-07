@@ -55,19 +55,6 @@ class PagesController extends Controller
         return view('Pages.manageTournament')->with('tournament', $tournament);
     }
 
-    /**
-    *   Affichage du planning
-    *
-    *   paramètre : id du tournoi
-    *   return : tournoi
-    **/
-    public function showPlanning($id)
-    {
-        $tournament = Tournament::with('equipes')->find($id);
-        
-        return view('Pages.showPlanning')->with('tournament', $tournament)->with('teams', $tournament->equipes);
-    }
-
 
     /**
     *   Affichage des équipes du tournoi

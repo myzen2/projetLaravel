@@ -79,20 +79,48 @@ $(function(){
 	});
 });
 
-function deleteTournament($id)
+function deleteTournament(id)
 {
 	var r = confirm("Etes-vous sûr de vouloir supprimer le tournoi ?");
 
 	if (r == true) {
-	    window.location.href = '/deleteTournament/' + $id;
+	    window.location.href = '/deleteTournament/' + id;
 	}
 }
 
-function deleteTeam($id)
+function deleteTeam(id)
 {
 	var r = confirm("Etes-vous sûr de vouloir supprimer cette équipe ?");
 
 	if (r == true) {
-	    window.location.href = '/deleteTeam/' + $id;
+	    window.location.href = '/deleteTeam/' + id;
 	}
+}
+
+function saveGame(idTournament, team1, team2, gameNb, time)
+{
+	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+	var score1 = document.getElementById('matchIDHome'+gameNb).value;
+	var score2 = document.getElementById('matchIDAway'+gameNb).value;
+
+	if(score1 == "" || score2 == "")
+	{
+		alert("Veuillez insérer les scores !");
+		return;
+	}
+
+	$.ajax({ url: '/saveScoreTeam',
+			 data: {tournament_id : idTournament,
+			 		equipe1 : team1,
+			 		equipe2 : team2,
+			 		score1 : score1,
+			 		score2 : score2,
+			 		heureMatch : time,
+			 		_token: CSRF_TOKEN
+			 },
+			 type: 'post',
+        success: function (data) {
+	        alert(data);
+	    }
+	});
 }

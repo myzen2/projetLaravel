@@ -41,35 +41,6 @@ function generateMatchs($groupes, $tournament)
 	$games = createCombinaison($groupes);
 	$hours = generateHours($tournament, $nbOfRound);
 
-	print_r($games);
-
-	/* Generate the matchs round by round*/
-	/*$indexGroupe=0;
-
-	for($i=0; $i < $nbOfRound; $i++)
-	{
-		$hourEndNextGame = strtotime($hours[$i]) + (60 * $tournament->tempsMatch);
-		$table[$i][0] = $hours[$i] . " - " . date("H:i", $hourEndNextGame);
-
-		for($j=0; $j < $tournament->nbTerrain; $j++)
-		{
-			/*$matchs[$i][$j]['Home'] = ...;
-			$matchs[$i][$j]['Away'] = ...;
-
-			$table[$i][$j+$j+1] = "Round :" . $i . " Terrain :" . $j . " Match du groupe :" . $indexGroupe ;
-			
-			$table[$i][$j+$j+2] = "<input type='number' name='matchIDHome' min='0' max='100'>";
-			$table[$i][$j+$j+2] .= "-";
-			$table[$i][$j+$j+2] .= "<input type='number' name='matchIDAway' min='0' max='100'>";;
-		}
-
-		$indexGroupe++;
-		if($indexGroupe >= $nbOfGroupes)
-		{
-			$indexGroupe = 0;
-		}
-	}*/
-
 	$indiceMatch = 0;
 
 	for($i=0; $i < $nbOfRound; $i++)
@@ -81,14 +52,16 @@ function generateMatchs($groupes, $tournament)
 		{
 			if(in_array("forfait", $games[$indiceMatch]))
 				$indiceMatch++;
-			
+
 			$game = $games[$indiceMatch]; 
 
 			$table[$i][$j+$j+1] = $game[0] . ' - ' . $game[1];
 			
-			$table[$i][$j+$j+2] = "<input type='number' name='matchIDHome' min='0' max='100'>";
+			$table[$i][$j+$j+2] = "<input type='number' id='matchIDHome".$indiceMatch."' name='matchIDHome".$indiceMatch."' min='0' max='100'>";
 			$table[$i][$j+$j+2] .= "-";
-			$table[$i][$j+$j+2] .= "<input type='number' name='matchIDAway' min='0' max='100'>";
+			$table[$i][$j+$j+2] .= "<input type='number' id='matchIDAway".$indiceMatch."' name='matchIDAway".$indiceMatch."' min='0' max='100'>";
+
+			$table[$i][$j+$j+2] .= "<input type='button' name='saveScore' value='Sauvegarder' onclick='saveGame(".$tournament->id.", \"". $game[0] ."\", \"". $game[1] ."\", ".$indiceMatch.", \"". $hours[$i] ."\")' />";
 
 			$indiceMatch++;
 		}

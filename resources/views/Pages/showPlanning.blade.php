@@ -1,5 +1,7 @@
 @extends('appWithoutMenu')
 
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+
 @section('contentTitle')
 	Planning du tournoi : {{ $tournament->nom }}
 @stop

@@ -18,4 +18,12 @@ class Match extends Model
     ];
 
     public $timestamps = false;
+
+    public function getMatch($data)
+    {
+        $match = Match::where($data)
+                        ->first(); //Match::where($data)->get();
+        echo $match;
+        return $match;
+    }
 }
