@@ -71,6 +71,7 @@ function generateMatchs($groupes, $tournament)
 	$nbOfRound = ceil($nbOfMatchs / $tournament->nbTerrain);
 
 	//print_r($groupes);
+	$hours = generateHours($tournament, $nbOfRound);
 
 	/* Generate the matchs round by round*/
 	$indexGroupe=0;
@@ -78,7 +79,9 @@ function generateMatchs($groupes, $tournament)
 	for($i=0; $i < $nbOfRound; $i++)
 	{
 		$table .= "<tr>";
-		$table .= "<td> Heure </td>";
+
+		$hourEndNextGame = strtotime($hours[$i]) + (60 * $tournament->tempsMatch);
+		$table .= "<td><b>" . $hours[$i] . " - " . date("H:i", $hourEndNextGame) . "</b></td>";
 
 		for($j=0; $j < $tournament->nbTerrain; $j++)
 		{
@@ -87,7 +90,11 @@ function generateMatchs($groupes, $tournament)
 			$matchs[$i][$j]['Away'] = ...;*/
 
 			$table .= "<td>Round :" . $i . " Terrain :" . $j . " Match du groupe :" . $indexGroupe . "</td>";
-			$table .= "<td> Score </td>";
+			$table .= "<td><b>";
+			$table .= "<input type='number' name='matchIDHome' min='0' max='100'>";
+			$table .= "-";
+			$table .= "<input type='number' name='matchIDAway' min='0' max='100'>";
+			$table .= "</b></td>";
 		}
 
 		$table .= "</tr>";
@@ -100,5 +107,27 @@ function generateMatchs($groupes, $tournament)
 	}
 
 	return $table;
+}
+
+function generateHours($tournament, $nbOfRound)
+{
+	$hours = array();
+
+	$hours[0] = $tournament->heureDebutTournoi;
+
+	for($i=1; $i < $nbOfRound; $i++)
+	{	
+		$totalMinutes = 60 * ($tournament->tempsMatch + $tournament->tempsEntreMatch);
+		$hourNextGame = strtotime($hours[$i-1]) + $totalMinutes;
+
+		if($hourNextGame >= $tournament->pauseDebut && $hourNextGame < $tournament->pauseFin)
+		{
+			$hourNextGame = strtotime($tournament->pauseFin);
+		}
+
+		$hours[$i] = date("H:i", $hourNextGame);		
+	}
+
+	return $hours;
 }
 ?>
