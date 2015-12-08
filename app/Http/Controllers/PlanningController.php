@@ -44,11 +44,13 @@ class PlanningController extends Controller
         if(Request::ajax())
         {
             $data = Input::all();
+
             unset($data['_token']);
             unset($data['score1']);
             unset($data['score2']);
 
             $match = Match::firstOrNew($data);
+
             $match->fill(Input::all());
             $match->save();
         }
@@ -113,6 +115,7 @@ class PlanningController extends Controller
                 $game = $games[$indiceMatch]; 
 
                 array_push($assocMatch, array('equipe1' => $game[0], 'equipe2' => $game[1], 'tournament_id' => $tournament->id, 
+                                              'groupe' => $game[2],
                                               'heureMatchDebut' => $hours[$i],
                                               'heureMatchFin' => date("H:i", $hourEndNextGame)));
 
@@ -181,7 +184,8 @@ class PlanningController extends Controller
 
             foreach ($groups as $group) 
             {
-                array_push($matchs, array($group[$c[0]], $group[$c[1]]));
+                $numGroupe = array_search($group, $groups) + 1;
+                array_push($matchs, array($group[$c[0]], $group[$c[1]], $numGroupe));
             }
         }
 

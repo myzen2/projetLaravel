@@ -15,7 +15,8 @@ class Match extends Model
             'score2',
             'heureMatchDebut',
             'heureMatchFin',
-            'tournament_id'
+            'tournament_id',
+            'groupe'
     ];
 
     public $timestamps = false;

@@ -61,7 +61,7 @@ function generateMatchs($groupes, $tournament)
 			$table[$i][$j+$j+2] .= "-";
 			$table[$i][$j+$j+2] .= "<input type='number' id='matchIDAway".$indiceMatch."' name='matchIDAway".$indiceMatch."' min='0' max='100'>";
 
-			$table[$i][$j+$j+2] .= "<input type='button' name='saveScore' value='Sauvegarder' onclick='saveGame(".$tournament->id.", \"". $game[0] ."\", \"". $game[1] ."\", ".$indiceMatch.", \"". $hours[$i] ."\")' />";
+			$table[$i][$j+$j+2] .= "<input type='button' class="saveScoreBtn" name='saveScore' value='Sauvegarder' onclick='saveGame(".$tournament->id.", \"". $game[0] ."\", \"". $game[1] ."\", ".$indiceMatch.", \"". $hours[$i] ."\")' />";
 
 			$indiceMatch++;
 		}

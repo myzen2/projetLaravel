@@ -10,6 +10,7 @@
 	<div class="table-responsive" id="print_button_div">
 		<ul class="nav nav-pills nav-justified">
 			<li><a href="#" onclick="window.print(); return false;" title="Imprimer tournoi" ><span class="glyphicon glyphicon-print"></span> Imprimer tournoi</a></li>
+			<li><a href="/treeTournament/{{ $tournament->id }}" title="Génération de l'arbre" ><span class=""></span> Générer arbre</a></li>
 		</ul>
 	</div>
 

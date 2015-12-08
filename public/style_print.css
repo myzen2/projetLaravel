@@ -1,6 +1,7 @@
-header, footer, #print_button_div
+header, footer, #print_button_div, input[type=button]
 {
 	display: none;
+	visibility: hidden;
 }
 
 @media print
@@ -9,4 +10,9 @@ header, footer, #print_button_div
 	{
 		size: landscape
 	}
+}
+
+{
+    color: #f00;
+    /* and so on... */
 }
