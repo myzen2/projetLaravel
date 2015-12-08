@@ -74,6 +74,16 @@ class TreeTournamentController extends Controller
             }
         }
 
+        if(count($qualifiedTeam) >= 4)
+        {
+            for($i = 0; $i < count($qualifiedTeam); $i+=4)
+            {
+                $tmp = $qualifiedTeam[$i];
+                $qualifiedTeam[$i] = $qualifiedTeam[$i+2];
+                $qualifiedTeam[$i+2] = $tmp;
+            }
+        }
+
         return $qualifiedTeam;
     }
 
