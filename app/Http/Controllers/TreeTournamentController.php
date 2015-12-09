@@ -55,7 +55,7 @@ class TreeTournamentController extends Controller
     private function takeTeamQualified($tournament, $classement, $nbGroupe)
     {
         $qualifiedTeam = array();
-        $arrayNbTeamQualif = array('0' => 32, '1' => 16, '2' => 8, '3' => 4, '4' => 1);
+        $arrayNbTeamQualif = array('0' => 32, '1' => 16, '2' => 8, '3' => 4, '4' => 2);
         $nbTeamQualif = $arrayNbTeamQualif[$tournament->typeFinales];
 
         $nbTeamQualifPerGroup = $nbTeamQualif / $nbGroupe;

@@ -48,6 +48,8 @@ class PlanningController extends Controller
             unset($data['_token']);
             unset($data['score1']);
             unset($data['score2']);
+            unset($data['heureMatchDebut']);
+            unset($data['heureMatchFin']);
 
             $match = Match::firstOrNew($data);
 
@@ -126,6 +128,7 @@ class PlanningController extends Controller
         return $assocMatch;
     }
 
+    /* Génération des heures de matchs */
     private function generateHours($tournament, $nbOfRound)
     {
         $hours = array();
@@ -148,6 +151,7 @@ class PlanningController extends Controller
         return $hours;
     }
 
+    /* Trouver les combinaison possible pour les matchs de groupes */
     private function createCombinaison($groups)
     {
         if(count($groups) == 0)
@@ -172,6 +176,7 @@ class PlanningController extends Controller
         return $this->generateMatchsCalendar($groups, $arrayCombin);
     }
 
+    /* Génération du calendrier des matchs */
     private function generateMatchsCalendar($groups, $arrayCombin)
     {
         $matchs = array();

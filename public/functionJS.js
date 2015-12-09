@@ -79,24 +79,6 @@ $(function(){
 	});
 });
 
-function deleteTournament(id)
-{
-	var r = confirm("Etes-vous sûr de vouloir supprimer le tournoi ?");
-
-	if (r == true) {
-	    window.location.href = '/deleteTournament/' + id;
-	}
-}
-
-function deleteTeam(id)
-{
-	var r = confirm("Etes-vous sûr de vouloir supprimer cette équipe ?");
-
-	if (r == true) {
-	    window.location.href = '/deleteTeam/' + id;
-	}
-}
-
 function saveGame(idTournament, team1, team2, gameNb, timeStart, timeEnd)
 {
 	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');

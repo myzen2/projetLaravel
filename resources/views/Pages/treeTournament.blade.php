@@ -47,7 +47,7 @@ function ArrayToTreeArray($array)
     while(pow(2,$x)<sizeof($array))
     {
     $x++;
-    $sol = pow(2,$x)-sizeof($array); //nombre de forfeit à insérer
+    $sol = pow(2,$x)-sizeof($array); //nombre de forfait à insérer
     }
     
     if($sol%2!=0)
