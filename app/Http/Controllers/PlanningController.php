@@ -35,7 +35,7 @@ class PlanningController extends Controller
             $game['score2'] = $match->score2;
             array_push($newGames, $game);
         }
-
+        
         return view('Pages.showPlanning')->with('games', $newGames)->with('tournament', $tournament);
     }
 
@@ -81,18 +81,25 @@ class PlanningController extends Controller
         $matchs = array();
         $table = array();
 
+        /* Add a fictive team for having a pair number of team */
+        if($tournament->nbEquipe % 2 != 0)
+        {
+            for($i=0; $i < $nbOfGroupes; $i++)
+            {
+                if (count($groupes[$i])%2 == 0)
+                {
+                    array_push($groupes[$i],"forfait");
+                    break;
+                }
+            }
+        }
+
         /* Count the number of matchs */
         $nbOfMatchs = 0;
 
         for($i=0; $i < $nbOfGroupes; $i++)
         {
             $nbOfMatchs += (count($groupes[$i]) * (count($groupes[$i]) - 1)) / 2;
-
-            /* Add a fictive team for having a pair number of team */
-            if (count($groupes[$i])%2 != 0)
-            {
-                array_push($groupes[$i],"forfait");
-            }
         }
 
         /* Count the number of rounds */
@@ -112,7 +119,13 @@ class PlanningController extends Controller
             for($j = 0 ; $j < $tournament->nbTerrain; $j++)
             {
                 if(in_array("forfait", $games[$indiceMatch]))
+                {
                     $indiceMatch++;
+                    if($indiceMatch >= count($games))
+                    {
+                        break 2;
+                    }
+                }
 
                 $game = $games[$indiceMatch]; 
 
@@ -122,9 +135,13 @@ class PlanningController extends Controller
                                               'heureMatchFin' => date("H:i", $hourEndNextGame)));
 
                 $indiceMatch++;
+                if($indiceMatch >= count($games))
+                {
+                    break 2;
+                }
+
             }
         }
-
         return $assocMatch;
     }
 
@@ -136,7 +153,7 @@ class PlanningController extends Controller
         $hours[0] = $tournament->heureDebutTournoi;
 
         for($i=1; $i < $nbOfRound; $i++)
-        {   
+        {  
             $totalMinutes = 60 * ($tournament->tempsMatch + $tournament->tempsEntreMatch);
             $hourNextGame = strtotime($hours[$i-1]) + $totalMinutes;
 
@@ -172,7 +189,6 @@ class PlanningController extends Controller
                 }
             }
         }
-
         return $this->generateMatchsCalendar($groups, $arrayCombin);
     }
 
@@ -182,11 +198,13 @@ class PlanningController extends Controller
         $matchs = array();
 
         $newArrayCombin = $this->sortOrderGame($arrayCombin);
-
+        //print_r($newArrayCombin);
         foreach($newArrayCombin as $combin)
         {
             $c = explode(";", $combin);
 
+            //print_r($groups);
+            //print_r($c);
             foreach ($groups as $group) 
             {
                 $numGroupe = array_search($group, $groups) + 1;
@@ -209,7 +227,6 @@ class PlanningController extends Controller
             if(isset($arrayCombin[$lastIndice]))
                 array_push($newArrayCombin, $arrayCombin[$lastIndice]);
         }
-
         return $newArrayCombin;
     }
 }

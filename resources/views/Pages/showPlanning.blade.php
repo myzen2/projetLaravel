@@ -10,11 +10,11 @@
 	<div class="table-responsive" id="print_button_div">
 		<ul class="nav nav-pills nav-justified">
 			<li><a href="#" onclick="window.print(); return false;" title="Imprimer tournoi" ><span class="glyphicon glyphicon-print"></span> Imprimer tournoi</a></li>
-			<li><a href="/treeTournament/{{ $tournament->id }}" title="Génération de l'arbre" ><span class=""></span> Générer arbre</a></li>
+			<li><a href="/treeTournament/{{ $tournament->id }}" title="Génération de l'arbre" ><span class="glyphicon glyphicon-tree-conifer"></span> Générer arbre</a></li>
 		</ul>
 	</div>
 
-	<div class="table-responsive"> 
+	<div class="table-responsive">
 		<table class="table">
 			<tr>
 				<th>Heures</th>
@@ -26,6 +26,7 @@
 
 			{{--*/ $nbOfRound = ceil(count($games) / $tournament->nbTerrain) /*--}}
 			{{--*/ $indiceMatch = 0 /*--}}
+			{{--*/ $noMoreMatch = false /*--}}
 			
 			@for ($i=0; $i < $nbOfRound; $i++)
 
@@ -37,24 +38,29 @@
 
 				@for ($j = 0 ; $j < $tournament->nbTerrain; $j++)
 
-					@if($games[$indiceMatch]['equipe1'] == "forfait" || $games[$indiceMatch]['equipe2'] == "forfait")
-						{{--*/ $indiceMatch++ /*--}}
+					@if($noMoreMatch == true)
+						<td></td>
+						<td></td>
+					@else
+						<td>{{ $games[$indiceMatch]['equipe1'] }} - {{ $games[$indiceMatch]['equipe2'] }}</td>
+
+						{{--*/ $score1 = $games[$indiceMatch]['score1'] /*--}}
+						{{--*/ $score2 = $games[$indiceMatch]['score2'] /*--}}
+						
+						<td>
+							<input type='number' id='matchIDHome{{ $indiceMatch }}' name='matchIDHome{{ $indiceMatch }}' value='{{ $score1 }}' min='0' max='100'>
+							-
+							<input type='number' id='matchIDAway{{ $indiceMatch }}' name='matchIDAway{{ $indiceMatch }}' value='{{ $score2 }}' min='0' max='100'>
+
+							<input type='button' name='saveScore' value='Sauvegarder' onclick='saveGame({{ $tournament->id }}, "{{ $games[$indiceMatch]['equipe1'] }}", "{{ $games[$indiceMatch]['equipe2'] }}", {{ $indiceMatch }}, "{{ $heureDebut }}", "{{ $heureFin }}")' />
+						</td>
 					@endif
 
-					<td>{{ $games[$indiceMatch]['equipe1'] }} - {{ $games[$indiceMatch]['equipe2'] }}</td>
-
-					{{--*/ $score1 = $games[$indiceMatch]['score1'] /*--}}
-					{{--*/ $score2 = $games[$indiceMatch]['score2'] /*--}}
-					
-					<td>
-						<input type='number' id='matchIDHome{{ $indiceMatch }}' name='matchIDHome{{ $indiceMatch }}' value='{{ $score1 }}' min='0' max='100'>
-						-
-						<input type='number' id='matchIDAway{{ $indiceMatch }}' name='matchIDAway{{ $indiceMatch }}' value='{{ $score2 }}' min='0' max='100'>
-
-						<input type='button' name='saveScore' value='Sauvegarder' onclick='saveGame({{ $tournament->id }}, "{{ $games[$indiceMatch]['equipe1'] }}", "{{ $games[$indiceMatch]['equipe2'] }}", {{ $indiceMatch }}, "{{ $heureDebut }}", "{{ $heureFin }}")' />
-					</td>
-
 					{{--*/ $indiceMatch++ /*--}}
+
+					@if($indiceMatch >= count($games))
+						{{--*/ $noMoreMatch = true /*--}}
+					@endif
 
 				@endfor
 				</tr>
