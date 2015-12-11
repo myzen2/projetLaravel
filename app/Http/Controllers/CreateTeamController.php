@@ -13,12 +13,13 @@ use Input;
 
 class CreateTeamController extends Controller
 {
-    
+    /* Formulaire de création d'équipe */
     public function getTeam($id)
     {
         return view('Pages.formCreateTeam')->with(Equipe::find($id)->toArray());
     }
 
+    /* Création ou update de l'équipe */
     public function postTeam(Request $request)
     {
         $input = $request->all();
@@ -48,6 +49,7 @@ class CreateTeamController extends Controller
         return redirect('/listAllTeams/'.$input['tournament_id']);
     }
 
+    /* Suppression de l'équipe */
     public function deleteTeam($id)
     {
         $team = Equipe::find($id);

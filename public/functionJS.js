@@ -1,6 +1,7 @@
 var equipe = [];
 var lastNumber = 0;
 
+/* Ajout ou supprime champ d'ajout d'équipe */
 function changeNbEquipe()
 {
 	var val = document.getElementById('nbEquipe').value;
@@ -17,6 +18,7 @@ function changeNbEquipe()
 	}
 }
 
+/* Ajout de champs création d'équipe */
 function addEquipeToTournament(val)
 {
 	var nbEquipe = document.getElementById('nbEquipe').value;
@@ -37,6 +39,7 @@ function addEquipeToTournament(val)
 	}
 }
 
+/* Supprime champs création d'équipe */
 function removeEquipeFromTournament(val)
 {
 	var div = document.getElementById('equipeBox');
@@ -49,36 +52,35 @@ function removeEquipeFromTournament(val)
 	}
 }
 
+/* Cacher certains champs selon le type de tournoi */
 function changeGroupe()
 {
 	var type = document.getElementById('typeTournoi').value;
+	var display = 'block';
 
 	if(type == 'Elimination direct')
-	{
-		document.getElementById('inputGroupe').style.display = 'hide';
-	}
-	else
-	{
-		document.getElementById('inputGroupe').style.display = 'block';
-	}
+		display = 'hide';
+
+	document.getElementById('inputGroupe').style.display = display;
+	document.getElementById('inputNbTerrains').style.display = display;
+	document.getElementById('inputTypeFinale').style.display = display;
 }
 
 $(function(){
 	$('#typeTournoi').change(function(e){
 		var type = document.getElementById('typeTournoi').value;
+		var display = '';
 
-		console.log(type);
 		if(type == 1)
-		{
-			document.getElementById('inputGroupe').style.display = 'none';
-		}
-		else
-		{
-			document.getElementById('inputGroupe').style.display = '';
-		}
+			display = 'none';
+
+		document.getElementById('inputGroupe').style.display = display;
+		document.getElementById('inputNbTerrains').style.display = display;
+		document.getElementById('inputTypeFinale').style.display = display;
 	});
 });
 
+/* Sauvegarde du score du match */
 function saveGame(idTournament, team1, team2, gameNb, timeStart, timeEnd)
 {
 	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');

@@ -24,6 +24,12 @@ class PlanningController extends Controller
     {
         $tournament = Tournament::with('equipes')->find($id);
 
+        // Si c'est un tournoi à élimination direct
+        if($tournament->typeTournoi == 1) 
+        {
+            return view('Pages.treeTournament')->with('qualifiedTeam', $tournament->equipes->pluck('nom'));
+        }
+
         $groupes = $this->createGroups($tournament->equipes, $tournament);
         $games = $this->generateMatchs($groupes, $tournament);
         $newGames = array();
@@ -39,6 +45,7 @@ class PlanningController extends Controller
         return view('Pages.showPlanning')->with('games', $newGames)->with('tournament', $tournament);
     }
 
+    /* Sauvegarde du résultat du match */
     public function saveGameData(Request $request)
     {
         if(Request::ajax())
@@ -59,6 +66,7 @@ class PlanningController extends Controller
         return 'Score enregistré';
     }
 
+    /* Création des groupes */
     private function createGroups($teams, $tournament)
     {
         // create an array of teams
@@ -75,6 +83,7 @@ class PlanningController extends Controller
         return $groupes;
     }
 
+    /* Génération des matchs à jouer */
     private function generateMatchs($groupes, $tournament)
     {
         $nbOfGroupes = count($groupes);
@@ -198,13 +207,11 @@ class PlanningController extends Controller
         $matchs = array();
 
         $newArrayCombin = $this->sortOrderGame($arrayCombin);
-        //print_r($newArrayCombin);
+        
         foreach($newArrayCombin as $combin)
         {
             $c = explode(";", $combin);
 
-            //print_r($groups);
-            //print_r($c);
             foreach ($groups as $group) 
             {
                 $numGroupe = array_search($group, $groups) + 1;
@@ -215,6 +222,7 @@ class PlanningController extends Controller
         return $matchs;
     }
 
+    /* Combinaison des matchs */
     private function sortOrderGame($arrayCombin)
     {
         $newArrayCombin = array();

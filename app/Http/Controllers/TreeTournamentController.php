@@ -27,6 +27,7 @@ class TreeTournamentController extends Controller
         return view('Pages.treeTournament')->with('qualifiedTeam', $qualifiedTeam)->with('tournamentId', $id);
     }
 
+    /* Attribution des points dans chaque groupe */
     private function searchTeamQualified($tournament)
     {
         $games = Match::where('tournament_id', '=', $tournament->id)->get();
@@ -52,10 +53,11 @@ class TreeTournamentController extends Controller
         return $this->takeTeamQualified($tournament, $classement, $nbGroup);
     }
 
+    /* Récupération des équipes qualifiés pour le tour suivant */
     private function takeTeamQualified($tournament, $classement, $nbGroupe)
     {
         $qualifiedTeam = array();
-        $arrayNbTeamQualif = array('0' => 32, '1' => 16, '2' => 8, '3' => 4, '4' => 2);
+        $arrayNbTeamQualif = array('0' => 32, '1' => 16, '2' => 8, '3' => 4, '4' => 2); // Type de final
         $nbTeamQualif = $arrayNbTeamQualif[$tournament->typeFinales];
 
         $nbTeamQualifPerGroup = $nbTeamQualif / $nbGroupe;
@@ -74,6 +76,10 @@ class TreeTournamentController extends Controller
             }
         }
 
+        /* 
+            Inversion des matchs, les équipes du même groupe 
+            ne joue pas l'une contre l'autre
+        */
         if(count($qualifiedTeam) >= 4)
         {
             for($i = 0; $i < count($qualifiedTeam); $i+=4)
@@ -87,6 +93,7 @@ class TreeTournamentController extends Controller
         return $qualifiedTeam;
     }
 
+    /* Points par match gagné, perdu et égalité */
     private function createPointTeam($team, $classement, $groupe, $pointWon)
     {
         if(!array_key_exists($team, $classement[$groupe]))
@@ -108,6 +115,7 @@ class TreeTournamentController extends Controller
         else return 1;
     }
 
+    /* Création des groupes */
     private function createGroups($teams, $tournament)
     {
         // create an array of teams

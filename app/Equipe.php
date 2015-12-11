@@ -26,6 +26,7 @@ class Equipe extends Model
     	return $this->belongsTo('App\Tournament');
     }
 
+    /* Création équipe */
     public static function updateEquipe($nom, $tournamentId)
     {
     	$equipe = new Equipe;

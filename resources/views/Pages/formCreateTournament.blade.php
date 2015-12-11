@@ -36,6 +36,8 @@
 		</ul>		
 	@endif
 
+	<!-- Formulaire de création / modification de tournoi -->
+
 	{!! Form::open(['url' => 'createTournament']) !!}
 		<div class="form-group">
 			{!! Form::label('lieu', 'Lieu :') !!}
@@ -69,12 +71,12 @@
 			{!! Form::input('number', 'nbGroupe', $nbGroupe, array('min' => '2', 'max' => '24', 'class' => 'form-control')) !!}
 		</div>
 
-		<div class="form-group">
+		<div class="form-group" id="inputTypeFinale">
 			{!! Form::label('typeFinales', 'Type de finales :') !!}
 			{!! Form::select('typeFinales', array('0' => "1/16", '1' => "1/8", '2' => "1/4", '3' => "1/2", '4' => "Finale"), $typeFinales, array('class' => 'form-control')) !!}
 		</div>
 
-		<div class="form-group">
+		<div class="form-group" id="inputNbTerrains">
 			{!! Form::label('nbTerrain', 'Nombre de terrains :') !!}
 			{!! Form::input('number', 'nbTerrain', $nbTerrain, array('min' => '1', 'max' => '10', 'class' => 'form-control')) !!}
 		</div>

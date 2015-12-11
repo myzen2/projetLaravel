@@ -14,6 +14,7 @@ use Input;
 class CreateTournamentController extends Controller
 {
     
+    /* Affichage formulaire création de tournoi */
     public function getTournament(Request $request)
     {
         $titleTournament = session('nom');
@@ -37,6 +38,7 @@ class CreateTournamentController extends Controller
         return view('Pages.formCreateTournament')->with($data);
     }
 
+    /* Ajout ou update du tournoi */
     public function postTournament(Request $request)
     {
         $input = $request->all();
@@ -81,11 +83,13 @@ class CreateTournamentController extends Controller
         return redirect($page)->with('tournament', $tournament);
     }
 
+    /* Affichage information tournoi pour la modification */
     public function updateTournament($id)
     {
         return view('Pages.formCreateTournament')->with(Tournament::find($id)->toArray());
     }
 
+    /* Suppression tournoi */
     public function deleteTournament($id)
     {
         $tournament = Tournament::find($id);

@@ -34,6 +34,8 @@
 		</ul>		
 	@endif
 
+	<!-- Formulaire de création / modification d'équipe -->
+	
 	{!! Form::open(['url' => '/createTeam']) !!}
 		<div class="form-group">
 			{!! Form::label('nom', 'Nom :') !!}

@@ -1,3 +1,9 @@
+<!--
+		Auteurs : Assunçao Jeshon, Burri Bastien, Di Stasio Leonardo
+
+		Page d'affichage des matchs et enregistrement des scores pour chaque match
+-->
+
 @extends('appWithoutMenu')
 
 <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -52,7 +58,7 @@
 							-
 							<input type='number' id='matchIDAway{{ $indiceMatch }}' name='matchIDAway{{ $indiceMatch }}' value='{{ $score2 }}' min='0' max='100'>
 
-							<input type='button' name='saveScore' value='Sauvegarder' onclick='saveGame({{ $tournament->id }}, "{{ $games[$indiceMatch]['equipe1'] }}", "{{ $games[$indiceMatch]['equipe2'] }}", {{ $indiceMatch }}, "{{ $heureDebut }}", "{{ $heureFin }}")' />
+							<input type='button' name='saveScore' value='Match terminé' onclick='saveGame({{ $tournament->id }}, "{{ $games[$indiceMatch]['equipe1'] }}", "{{ $games[$indiceMatch]['equipe2'] }}", {{ $indiceMatch }}, "{{ $heureDebut }}", "{{ $heureFin }}")' />
 						</td>
 					@endif
 
