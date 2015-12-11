@@ -50,7 +50,15 @@ class TreeTournamentController extends Controller
             $classement = $this->createPointTeam($game['equipe2'], $classement, $groupe, $pointWonTeam2);
         }
 
-        return $this->takeTeamQualified($tournament, $classement, $nbGroup);
+        $classementSorted = array();
+
+        foreach ($classement as $group) 
+        {
+            arsort($group);
+            array_push($classementSorted, $group);
+        }
+
+        return $this->takeTeamQualified($tournament, $classementSorted, $nbGroup);
     }
 
     /* Récupération des équipes qualifiés pour le tour suivant */
