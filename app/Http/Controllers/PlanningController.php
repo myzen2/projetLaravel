@@ -251,11 +251,6 @@ class PlanningController extends Controller
             array_push($qualifiedTeam, $equipe);
         }
 
-        for($i = $nbEquipeActuel; $i <= $nbEquipe; $i++)
-        {
-            array_push($qualifiedTeam, "BYE");
-        }
-
         return $qualifiedTeam;
     }
 }
