@@ -7,7 +7,7 @@
 </header>
 
 <!-- Contenu central de la page (menu et contenu) -->
-<div class="row col-sm-14">
+<div class="row col-sm-12">
 	<!-- Contenu avec titre -->
 	<section class="col-sm-12">
 		<div class="panel panel-default">

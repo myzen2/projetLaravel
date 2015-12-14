@@ -91,7 +91,7 @@ class PlanningController extends Controller
         $matchs = array();
         $table = array();
 
-        /* Add a fictive team for having a pair number of team */
+        /* Add a fictive team for having a even number of team */
         if($tournament->nbEquipe % 2 != 0)
         {
             for($i=0; $i < $nbOfGroupes; $i++)
