@@ -71,7 +71,7 @@
     }
 
     $nbforfeitdroit = $sol - $nbforfeitgauche;
-    $inserted = array('forfeit');
+    $inserted = array('BYE');
     
     for($i=0;$i<$nbforfeitgauche;$i++)
     {

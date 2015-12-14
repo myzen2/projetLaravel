@@ -27,7 +27,8 @@ class PlanningController extends Controller
         // Si c'est un tournoi à élimination direct
         if($tournament->typeTournoi == 1) 
         {
-            return view('Pages.treeTournament')->with('qualifiedTeam', $tournament->equipes->pluck('nom'));
+            $qualifiedTeam = $this->completeTable($tournament, $tournament->equipes->pluck('nom'));
+            return view('Pages.treeTournament')->with('qualifiedTeam', $qualifiedTeam);
         }
 
         $groupes = $this->createGroups($tournament->equipes, $tournament);
@@ -236,5 +237,25 @@ class PlanningController extends Controller
                 array_push($newArrayCombin, $arrayCombin[$lastIndice]);
         }
         return $newArrayCombin;
+    }
+
+    private function completeTable($tournament, $equipes)
+    {
+        $arrayNbTeamQualif = array('0' => 32, '1' => 16, '2' => 8, '3' => 4, '4' => 2); // Type de final
+        $nbEquipe = $arrayNbTeamQualif[$tournament->typeFinales];
+        $nbEquipeActuel = count($equipes);
+        $qualifiedTeam = array();
+
+        foreach ($equipes as $equipe) 
+        {
+            array_push($qualifiedTeam, $equipe);
+        }
+
+        for($i = $nbEquipeActuel; $i <= $nbEquipe; $i++)
+        {
+            array_push($qualifiedTeam, "BYE");
+        }
+
+        return $qualifiedTeam;
     }
 }
