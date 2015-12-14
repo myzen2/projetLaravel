@@ -5,7 +5,7 @@ var lastNumber = 0;
 function changeNbEquipe()
 {
 	var val = document.getElementById('nbEquipe').value;
-	if(val >= 2 && val <= 24)
+	if(val >= 2 && val <= 32)
 	{
 		if(val > lastNumber)
 		{

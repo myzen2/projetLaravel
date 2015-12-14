@@ -63,16 +63,16 @@ class CreateTournamentController extends Controller
             'tempsEntreMatch' => 'required',
             'typeTournoi' => 'required',
             'date' => 'required|date',
-            'pauseDebut' => 'required|date_format:H:i',
-            'pauseFin' => 'required|date_format:H:i'
-        ]);
+            'pauseDebut' => 'required|date_format:H:i|after:heureDebutTournoi',
+            'pauseFin' => 'required|date_format:H:i|after:pauseDebut'
+        ]);       
 
         if ($validator->fails()) 
         {
             return view('Pages.formCreateTournament')->withErrors($validator)->withInput(Input::all());
         }
 
-        $tournament = Tournament::create($input);
+        /*$tournament = Tournament::create($input);
         $equipe = new Equipe;
         foreach ($input['equipe'] as $value) 
         {
@@ -80,7 +80,8 @@ class CreateTournamentController extends Controller
         }
 
         $page = 'manageTournament/'.$tournament->id;
-        return redirect($page)->with('tournament', $tournament);
+        return redirect($page)->with('tournament', $tournament);*/
+        return '';
     }
 
     /* Affichage information tournoi pour la modification */
