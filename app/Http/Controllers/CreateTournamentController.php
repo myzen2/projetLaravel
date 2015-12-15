@@ -72,7 +72,7 @@ class CreateTournamentController extends Controller
             return view('Pages.formCreateTournament')->withErrors($validator)->withInput(Input::all());
         }
 
-        /*$tournament = Tournament::create($input);
+        $tournament = Tournament::create($input);
         $equipe = new Equipe;
         foreach ($input['equipe'] as $value) 
         {
@@ -80,8 +80,7 @@ class CreateTournamentController extends Controller
         }
 
         $page = 'manageTournament/'.$tournament->id;
-        return redirect($page)->with('tournament', $tournament);*/
-        return '';
+        return redirect($page)->with('tournament', $tournament);
     }
 
     /* Affichage information tournoi pour la modification */
